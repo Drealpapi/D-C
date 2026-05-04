@@ -76,10 +76,10 @@ export default function DivineHeader() {
         {/* Actions */}
         <div className="flex items-center gap-0 md:gap-1">
           <button
-            className="p-2.5 hover:bg-stone-100 dark:hover:bg-white/[0.06] rounded-full transition duration-200"
+            className="p-2.5 hover:bg-rose-50 dark:hover:bg-white/[0.06] rounded-full transition duration-200"
             aria-label="Search"
           >
-            <Search className="w-[18px] h-[18px] text-stone-600 dark:text-stone-400" />
+            <Search className="w-[18px] h-[18px] text-stone-500 dark:text-stone-400 hover:text-rose-500" />
           </button>
 
           {/* Account — shows name if logged in */}
@@ -108,21 +108,21 @@ export default function DivineHeader() {
           ) : (
             <Link
               href="/profile"
-              className="p-2.5 hover:bg-stone-100 dark:hover:bg-white/[0.06] rounded-full transition duration-200"
+              className="p-2.5 hover:bg-rose-50 dark:hover:bg-white/[0.06] rounded-full transition duration-200"
               aria-label="Account"
             >
-              <User className="w-[18px] h-[18px] text-stone-600 dark:text-stone-400" />
+              <User className="w-[18px] h-[18px] text-stone-500 dark:text-stone-400" />
             </Link>
           )}
 
           <Link
             href="/cart"
-            className="p-2.5 hover:bg-stone-100 dark:hover:bg-white/[0.06] rounded-full transition duration-200 relative"
+            className="p-2.5 hover:bg-rose-50 dark:hover:bg-white/[0.06] rounded-full transition duration-200 relative"
             aria-label="Cart"
           >
-            <ShoppingBag className="w-[18px] h-[18px] text-stone-600 dark:text-stone-400" />
+            <ShoppingBag className="w-[18px] h-[18px] text-stone-500 dark:text-stone-400" />
             {itemCount > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 bg-amber-500 text-stone-900 text-[10px] rounded-full w-4 h-4 flex items-center justify-center font-bold shadow-sm">
+              <span className="absolute -top-0.5 -right-0.5 bg-rose-400 dark:bg-amber-500 text-white dark:text-stone-900 text-[10px] rounded-full w-4 h-4 flex items-center justify-center font-bold shadow-sm">
                 {itemCount}
               </span>
             )}
@@ -131,19 +131,19 @@ export default function DivineHeader() {
           {mounted && (
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="p-2.5 hover:bg-stone-100 dark:hover:bg-white/[0.06] rounded-full transition duration-200"
+              className="p-2.5 hover:bg-rose-50 dark:hover:bg-white/[0.06] rounded-full transition duration-200"
               aria-label="Toggle theme"
             >
               {theme === 'dark'
                 ? <Sun  className="w-[18px] h-[18px] text-amber-400" />
-                : <Moon className="w-[18px] h-[18px] text-stone-500" />
+                : <Moon className="w-[18px] h-[18px] text-rose-300" />
               }
             </button>
           )}
 
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2.5 hover:bg-stone-100 dark:hover:bg-white/[0.06] rounded-full transition duration-200"
+            className="lg:hidden p-2.5 hover:bg-rose-50 dark:hover:bg-white/[0.06] rounded-full transition duration-200"
             aria-label="Menu"
           >
             {isMenuOpen

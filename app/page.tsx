@@ -46,11 +46,11 @@ export default function Home() {
         />
 
         {/* ── Feature strip ── */}
-        <section ref={featuresRef} className="py-10 md:py-12 px-4 border-b border-stone-100 dark:border-white/[0.05] bg-stone-50/60 dark:bg-white/[0.02]">
+        <section ref={featuresRef} className="py-10 md:py-12 px-4 border-b border-rose-100/60 dark:border-white/[0.05] bg-rose-50/40 dark:bg-white/[0.02]">
           <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             {features.map((f, i) => (
               <div key={f.label} className={`reveal text-center delay-${(i + 1) * 100}`}>
-                <div className="text-2xl mb-2 text-amber-600 dark:text-amber-400">{f.icon}</div>
+                <div className="text-2xl mb-2 text-rose-400 dark:text-amber-400">{f.icon}</div>
                 <p className="text-xs font-semibold uppercase tracking-widest text-stone-800 dark:text-stone-200 mb-1">{f.label}</p>
                 <p className="text-xs text-stone-400 dark:text-stone-500 leading-snug">{f.sub}</p>
               </div>
@@ -62,7 +62,7 @@ export default function Home() {
         <section ref={catRef} className="py-20 md:py-28 px-4 md:px-8">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-14 reveal">
-              <p className="text-[11px] uppercase tracking-[0.25em] text-amber-600 dark:text-amber-400 mb-3">Browse</p>
+              <p className="text-[11px] uppercase tracking-[0.25em] text-rose-400 dark:text-amber-400 mb-3">Browse</p>
               <h2 className="font-serif text-3xl md:text-4xl text-stone-900 dark:text-stone-100 mb-4">Our Collections</h2>
               <div className="gold-divider" />
             </div>
@@ -94,15 +94,15 @@ export default function Home() {
         </section>
 
         {/* ── New Arrivals ── */}
-        <section ref={arrivalsRef} className="py-20 md:py-24 px-4 md:px-8 bg-stone-50/70 dark:bg-white/[0.02]">
+        <section ref={arrivalsRef} className="py-20 md:py-24 px-4 md:px-8 bg-rose-50/30 dark:bg-white/[0.02]">
           <div className="max-w-7xl mx-auto">
             <div className="flex items-end justify-between mb-12">
               <div className="reveal">
-                <p className="text-[11px] uppercase tracking-[0.25em] text-amber-600 dark:text-amber-400 mb-3">Just In</p>
+                <p className="text-[11px] uppercase tracking-[0.25em] text-rose-400 dark:text-amber-400 mb-3">Just In</p>
                 <h2 className="font-serif text-3xl md:text-4xl text-stone-900 dark:text-stone-100 mb-3">New Arrivals</h2>
                 <div className="gold-divider" style={{ margin: 0 }} />
               </div>
-              <Link href="/shop/earrings" className="reveal reveal-right text-xs tracking-widest uppercase text-stone-500 dark:text-stone-400 hover:text-amber-700 dark:hover:text-amber-400 transition hidden sm:flex items-center gap-2 group">
+              <Link href="/shop/earrings" className="reveal reveal-right text-xs tracking-widest uppercase text-stone-500 dark:text-stone-400 hover:text-rose-500 dark:hover:text-amber-400 transition hidden sm:flex items-center gap-2 group">
                 View all <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
               </Link>
             </div>
@@ -138,7 +138,7 @@ export default function Home() {
             </svg>
           </div>
           <div className="max-w-3xl mx-auto text-center relative">
-            <p className="reveal text-[11px] uppercase tracking-[0.25em] text-amber-600 dark:text-amber-400 mb-4">Our Story</p>
+            <p className="reveal text-[11px] uppercase tracking-[0.25em] text-rose-400 dark:text-amber-400 mb-4">Our Story</p>
             <h2 className="reveal delay-100 font-serif text-3xl md:text-5xl text-stone-900 dark:text-stone-100 mb-6 leading-tight">
               Where Tradition<br className="hidden md:block" /> Meets Elegance
             </h2>
@@ -147,7 +147,7 @@ export default function Home() {
               Divine Couture is a UK-based Indian jewellery and clothing brand. We source and curate handcrafted pieces that honour centuries of Indian artisanship — bringing them to modern wardrobes across Britain.
             </p>
             <div className="reveal delay-400 mt-10">
-              <Link href="/shop/earrings" className="group inline-flex items-center gap-3 px-9 py-4 bg-stone-900 dark:bg-amber-500 text-white dark:text-stone-900 text-xs font-bold tracking-[0.2em] uppercase hover:bg-amber-700 dark:hover:bg-amber-400 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_8px_30px_rgba(212,175,55,0.25)]">
+              <Link href="/shop/earrings" className="group inline-flex items-center gap-3 px-9 py-4 bg-rose-400 dark:bg-amber-500 text-white dark:text-stone-900 text-xs font-bold tracking-[0.2em] uppercase hover:bg-rose-500 dark:hover:bg-amber-400 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(244,114,182,0.25)] dark:hover:shadow-[0_8px_30px_rgba(212,175,55,0.25)]">
                 Explore the Collection
                 <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
               </Link>
