@@ -4,35 +4,36 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ─────────────────────────────────────────────
-   LIGHT: Champagne ivory — warm, bridal luxury
-   Inspired by Sabyasachi / Indian couture houses
+   LIGHT: Blush ivory — soft pale pink, warm and
+   elegant. Premium bridal luxury with a feminine
+   warmth. Inspired by rose quartz & silk.
 ───────────────────────────────────────────── */
 :root {
-  --background:           oklch(0.975 0.008 78);   /* warm champagne white */
-  --foreground:           oklch(0.15 0.012 40);    /* deep warm charcoal */
-  --card:                 oklch(1 0.004 78);
-  --card-foreground:      oklch(0.15 0.012 40);
-  --popover:              oklch(1 0.004 78);
-  --popover-foreground:   oklch(0.15 0.012 40);
-  --primary:              oklch(0.14 0.012 40);    /* near-black charcoal */
-  --primary-foreground:   oklch(0.975 0.008 78);
-  --secondary:            oklch(0.68 0.13 72);     /* warm gold */
-  --secondary-foreground: oklch(0.15 0.012 40);
-  --muted:                oklch(0.94 0.010 75);
-  --muted-foreground:     oklch(0.46 0.010 55);
-  --accent:               oklch(0.68 0.13 72);     /* gold accent */
-  --accent-foreground:    oklch(0.15 0.012 40);
+  --background:           oklch(0.978 0.006 10);   /* blush white — barely-there pink */
+  --foreground:           oklch(0.18 0.012 20);    /* deep warm charcoal-rose */
+  --card:                 oklch(0.992 0.004 10);   /* pure blush white */
+  --card-foreground:      oklch(0.18 0.012 20);
+  --popover:              oklch(0.992 0.004 10);
+  --popover-foreground:   oklch(0.18 0.012 20);
+  --primary:              oklch(0.42 0.08 10);     /* deep dusty rose — primary CTA */
+  --primary-foreground:   oklch(0.978 0.006 10);
+  --secondary:            oklch(0.88 0.04 10);     /* pale blush — secondary */
+  --secondary-foreground: oklch(0.25 0.012 20);
+  --muted:                oklch(0.955 0.008 12);   /* very light blush muted */
+  --muted-foreground:     oklch(0.48 0.012 15);
+  --accent:               oklch(0.72 0.10 15);     /* muted rose accent */
+  --accent-foreground:    oklch(0.18 0.012 20);
   --destructive:          oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(1 0 0);
-  --border:               oklch(0.88 0.010 72);
-  --input:                oklch(0.94 0.010 75);
-  --ring:                 oklch(0.68 0.13 72);
+  --border:               oklch(0.90 0.012 12);    /* soft blush border */
+  --input:                oklch(0.955 0.008 12);
+  --ring:                 oklch(0.62 0.10 12);     /* rose ring */
   --radius:               0.2rem;
 
-  /* Brand gold */
-  --gold:                 oklch(0.72 0.14 72);
-  --gold-light:           oklch(0.88 0.10 78);
-  --gold-dark:            oklch(0.55 0.14 65);
+  /* Brand rose-gold */
+  --gold:                 oklch(0.68 0.10 18);     /* dusty rose-gold */
+  --gold-light:           oklch(0.88 0.06 15);     /* pale blush */
+  --gold-dark:            oklch(0.50 0.10 15);     /* deep rose */
 }
 
 /* ─────────────────────────────────────────────
@@ -156,10 +157,10 @@ body {
 .gold-shimmer {
   background: linear-gradient(
     90deg,
-    oklch(0.72 0.14 72) 0%,
-    oklch(0.88 0.10 78) 40%,
-    oklch(0.72 0.14 72) 60%,
-    oklch(0.55 0.14 65) 100%
+    oklch(0.68 0.10 18) 0%,
+    oklch(0.82 0.07 15) 40%,
+    oklch(0.68 0.10 18) 60%,
+    oklch(0.50 0.10 15) 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
@@ -198,18 +199,21 @@ body {
 .glass {
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background: oklch(0.975 0.008 78 / 0.85);
+  background: oklch(0.978 0.006 10 / 0.88);
 }
 .dark .glass {
   background: oklch(0.11 0.018 265 / 0.82);
 }
 
-/* ── Gold divider ── */
+/* ── Divider ── */
 .gold-divider {
   width: 48px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, oklch(0.72 0.14 72), transparent);
+  background: linear-gradient(90deg, transparent, oklch(0.68 0.10 18), transparent);
   margin: 0 auto;
+}
+.dark .gold-divider {
+  background: linear-gradient(90deg, transparent, oklch(0.72 0.14 72), transparent);
 }
 
 /* ── Keyframes ── */

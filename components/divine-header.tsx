@@ -34,8 +34,8 @@ export default function DivineHeader() {
     <header
       className={`w-full sticky top-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'glass shadow-[0_4px_30px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.4)] border-b border-stone-200/60 dark:border-white/[0.06]'
-          : 'bg-[#faf8f5]/95 dark:bg-[#0d0f1a]/95 border-b border-stone-200/80 dark:border-white/[0.05]'
+          ? 'glass shadow-[0_4px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.4)] border-b border-rose-100/80 dark:border-white/[0.06]'
+          : 'bg-[#fdf8f8]/95 dark:bg-[#0d0f1a]/95 border-b border-rose-100 dark:border-white/[0.05]'
       }`}
     >
       {/* Announcement bar */}
@@ -50,10 +50,10 @@ export default function DivineHeader() {
         <Link href="/" className="flex items-center gap-2 group shrink-0">
           <ThemeLogo size={32} />
           <div className="flex flex-col leading-none">
-            <span className="font-serif text-sm md:text-lg font-bold text-stone-900 dark:text-stone-100 tracking-wide group-hover:text-amber-700 dark:group-hover:text-amber-400 transition duration-300 whitespace-nowrap">
+            <span className="font-serif text-sm md:text-lg font-bold text-stone-900 dark:text-stone-100 tracking-wide group-hover:text-rose-700 dark:group-hover:text-amber-400 transition duration-300 whitespace-nowrap">
               Divine Couture
             </span>
-            <span className="text-[9px] tracking-[0.22em] text-stone-400 dark:text-stone-500 uppercase hidden md:block">
+            <span className="text-[9px] tracking-[0.22em] text-rose-300 dark:text-stone-500 uppercase hidden md:block">
               Indian Jewellery · UK
             </span>
           </div>
@@ -65,10 +65,10 @@ export default function DivineHeader() {
             <Link
               key={cat.name}
               href={cat.href}
-              className="relative text-sm font-medium text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-amber-400 transition duration-200 tracking-wide group"
+              className="relative text-sm font-medium text-stone-600 dark:text-stone-400 hover:text-rose-700 dark:hover:text-amber-400 transition duration-200 tracking-wide group"
             >
               {cat.name}
-              <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-amber-500 group-hover:w-full transition-all duration-300" />
+              <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-rose-400 dark:bg-amber-500 group-hover:w-full transition-all duration-300" />
             </Link>
           ))}
         </nav>
@@ -160,16 +160,16 @@ export default function DivineHeader() {
           isMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <nav className="border-t border-stone-100 dark:border-white/[0.05] bg-[#faf8f5]/98 dark:bg-[#0d0f1a]/98 backdrop-blur-xl px-5 py-4 space-y-0.5">
+        <nav className="border-t border-rose-50 dark:border-white/[0.05] bg-[#fdf8f8]/98 dark:bg-[#0d0f1a]/98 backdrop-blur-xl px-5 py-4 space-y-0.5">
           {categories.map((cat) => (
             <Link
               key={cat.name}
               href={cat.href}
-              className="flex items-center justify-between text-sm font-medium text-stone-700 dark:text-stone-300 hover:text-amber-700 dark:hover:text-amber-400 py-3.5 border-b border-stone-100/80 dark:border-white/[0.04] transition duration-200"
+              className="flex items-center justify-between text-sm font-medium text-stone-700 dark:text-stone-300 hover:text-rose-700 dark:hover:text-amber-400 py-3.5 border-b border-rose-50 dark:border-white/[0.04] transition duration-200"
               onClick={() => setIsMenuOpen(false)}
             >
               {cat.name}
-              <span className="text-stone-300 dark:text-stone-600 text-xs">→</span>
+              <span className="text-rose-200 dark:text-stone-600 text-xs">→</span>
             </Link>
           ))}
 
@@ -204,7 +204,7 @@ export default function DivineHeader() {
               </Link>
               <Link
                 href="/register"
-                className="flex-1 text-center py-2.5 text-xs tracking-widest uppercase bg-amber-500 text-stone-900 hover:bg-amber-400 transition rounded-sm font-semibold"
+                className="flex-1 text-center py-2.5 text-xs tracking-widest uppercase bg-rose-400 text-white hover:bg-rose-500 dark:bg-amber-500 dark:text-stone-900 dark:hover:bg-amber-400 transition rounded-sm font-semibold"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Register

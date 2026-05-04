@@ -50,12 +50,12 @@ export default function ProductCard({ product }: { product: Product }) {
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-1.5">
           {product.isNew && (
-            <span className="bg-stone-900 dark:bg-amber-500 text-white dark:text-stone-900 text-[10px] px-2.5 py-0.5 tracking-[0.15em] uppercase font-semibold">
+            <span className="bg-rose-400 dark:bg-amber-500 text-white dark:text-stone-900 text-[10px] px-2.5 py-0.5 tracking-[0.15em] uppercase font-semibold">
               New
             </span>
           )}
           {product.isOnSale && discount > 0 && (
-            <span className="bg-amber-600 text-white text-[10px] px-2.5 py-0.5 tracking-[0.15em] uppercase font-semibold">
+            <span className="bg-rose-600 dark:bg-amber-600 text-white text-[10px] px-2.5 py-0.5 tracking-[0.15em] uppercase font-semibold">
               −{discount}%
             </span>
           )}
@@ -77,7 +77,7 @@ export default function ProductCard({ product }: { product: Product }) {
             className={`absolute bottom-0 left-0 right-0 flex items-center justify-center gap-2 py-3 text-[11px] tracking-[0.18em] uppercase font-semibold transition-all duration-300 ${
               added
                 ? 'bg-emerald-600 text-white translate-y-0 opacity-100'
-                : 'bg-stone-900/95 dark:bg-amber-500 text-white dark:text-stone-900 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100'
+                : 'bg-rose-400/95 dark:bg-amber-500 text-white dark:text-stone-900 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100'
             }`}
           >
             {added
@@ -93,7 +93,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <p className="text-[10px] text-stone-400 dark:text-stone-500 uppercase tracking-[0.18em] capitalize">
           {product.category}
         </p>
-        <h3 className="text-sm text-stone-800 dark:text-stone-200 font-medium leading-snug line-clamp-2 group-hover:text-amber-700 dark:group-hover:text-amber-400 transition duration-200">
+        <h3 className="text-sm text-stone-800 dark:text-stone-200 font-medium leading-snug line-clamp-2 group-hover:text-rose-700 dark:group-hover:text-amber-400 transition duration-200">
           {product.name}
         </h3>
         <div className="flex items-center gap-2 pt-0.5">
