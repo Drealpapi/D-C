@@ -135,17 +135,17 @@ export default function DivineHero({ title, subtitle, ctaText, ctaHref }: Divine
       </div>
 
       {/* Content */}
-      <div className="absolute inset-0 z-30 flex flex-col justify-center px-6 md:px-16 lg:px-24">
+      <div className="absolute inset-0 z-30 flex flex-col justify-center px-5 md:px-16 lg:px-24">
         <div className="max-w-2xl">
 
-          {/* Eyebrow — location label changes per slide */}
+          {/* Eyebrow */}
           <div
             key={`eyebrow-${current}`}
-            className="flex items-center gap-3 mb-5 md:mb-6 animate-fade-in"
+            className="flex items-center gap-3 mb-3 md:mb-6 animate-fade-in"
             style={{ animationDelay: '0.1s' }}
           >
-            <div className="h-px w-8 bg-amber-400/70" />
-            <p className="text-xs uppercase tracking-[0.25em] text-amber-300/90 font-medium">
+            <div className="h-px w-6 md:w-8 bg-amber-400/70" />
+            <p className="text-[10px] md:text-xs uppercase tracking-[0.2em] md:tracking-[0.25em] text-amber-300/90 font-medium">
               {slide.location}
             </p>
           </div>
@@ -153,40 +153,40 @@ export default function DivineHero({ title, subtitle, ctaText, ctaHref }: Divine
           {/* Title */}
           <h1
             key={`title-${current}`}
-            className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.08] mb-5 md:mb-6 animate-fade-up"
+            className="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] mb-3 md:mb-6 animate-fade-up"
             style={{ animationDelay: '0.25s', textShadow: '0 2px 40px rgba(0,0,0,0.4)' }}
           >
             {current === 0 ? title : slide.tagline}
           </h1>
 
-          {/* Subtitle */}
+          {/* Subtitle — hidden on smallest screens to reduce clutter */}
           <p
             key={`sub-${current}`}
-            className="text-white/75 text-sm md:text-base lg:text-lg leading-relaxed mb-8 md:mb-10 max-w-lg animate-fade-up"
+            className="hidden sm:block text-white/75 text-sm md:text-base lg:text-lg leading-relaxed mb-6 md:mb-10 max-w-lg animate-fade-up"
             style={{ animationDelay: '0.4s' }}
           >
             {subtitle}
           </p>
 
-          {/* CTAs */}
-          <div className="flex flex-wrap gap-4 animate-fade-up" style={{ animationDelay: '0.55s' }}>
+          {/* CTAs — stacked on mobile, side by side on sm+ */}
+          <div className="flex flex-col sm:flex-row gap-3 animate-fade-up" style={{ animationDelay: '0.55s' }}>
             <Link
               href={ctaHref}
-              className="group relative inline-flex items-center gap-2 px-7 md:px-9 py-3.5 md:py-4 bg-amber-500 text-stone-900 text-xs md:text-sm font-bold tracking-[0.15em] uppercase overflow-hidden transition-all duration-300 hover:bg-amber-400 hover:shadow-[0_0_30px_rgba(212,175,55,0.4)]"
+              className="group relative inline-flex items-center justify-center gap-2 px-7 py-3 md:py-3.5 bg-amber-500 text-stone-900 text-xs font-bold tracking-[0.15em] uppercase transition-all duration-300 hover:bg-amber-400 hover:shadow-[0_0_30px_rgba(212,175,55,0.4)]"
             >
-              <span className="relative z-10">{ctaText}</span>
-              <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1">→</span>
+              <span>{ctaText}</span>
+              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
             </Link>
             <Link
               href="/shop/collections"
-              className="inline-flex items-center gap-2 px-7 md:px-9 py-3.5 md:py-4 border border-white/40 text-white text-xs md:text-sm font-medium tracking-[0.15em] uppercase hover:border-amber-400/70 hover:text-amber-300 transition-all duration-300 backdrop-blur-sm"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3 md:py-3.5 border border-white/40 text-white text-xs font-medium tracking-[0.15em] uppercase hover:border-amber-400/70 hover:text-amber-300 transition-all duration-300 backdrop-blur-sm"
             >
               Our Collections
             </Link>
           </div>
 
-          {/* Trust badges */}
-          <div className="flex items-center gap-6 mt-10 md:mt-12 animate-fade-in" style={{ animationDelay: '0.75s' }}>
+          {/* Trust badges — hidden on mobile, shown sm+ */}
+          <div className="hidden sm:flex items-center gap-5 mt-8 md:mt-12 animate-fade-in" style={{ animationDelay: '0.75s' }}>
             {['Handcrafted', 'UK Delivery', 'Bridal Specialists'].map((badge, i) => (
               <div key={badge} className="flex items-center gap-2">
                 {i > 0 && <div className="w-px h-3 bg-white/20" />}
@@ -197,8 +197,8 @@ export default function DivineHero({ title, subtitle, ctaText, ctaHref }: Divine
         </div>
       </div>
 
-      {/* Slide indicators */}
-      <div className="absolute bottom-10 left-6 md:left-16 lg:left-24 z-30 flex items-center gap-2">
+      {/* Slide indicators — moved up slightly on mobile */}
+      <div className="absolute bottom-6 md:bottom-10 left-5 md:left-16 lg:left-24 z-30 flex items-center gap-2">
         {SLIDES.map((_, i) => (
           <button
             key={i}

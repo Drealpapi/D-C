@@ -39,7 +39,7 @@ export default function DivineHeader() {
       }`}
     >
       {/* Announcement bar */}
-      <div className="bg-stone-900 dark:bg-[#080a12] py-2 px-4 text-center text-[11px] tracking-[0.2em] text-white/65 uppercase">
+      <div className="bg-stone-900 dark:bg-[#080a12] py-1.5 px-4 text-center text-[10px] md:text-[11px] tracking-[0.15em] md:tracking-[0.2em] text-white/65 uppercase truncate">
         ✦ &nbsp;Free UK delivery on orders over £75&nbsp; · &nbsp;shop.divinecouture&nbsp; ✦
       </div>
 
@@ -47,10 +47,10 @@ export default function DivineHeader() {
       <div className="px-4 md:px-8 py-3.5 flex items-center justify-between max-w-7xl mx-auto">
 
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <ThemeLogo size={38} />
+        <Link href="/" className="flex items-center gap-2 group shrink-0">
+          <ThemeLogo size={32} />
           <div className="flex flex-col leading-none">
-            <span className="font-serif text-base md:text-lg font-bold text-stone-900 dark:text-stone-100 tracking-wide group-hover:text-amber-700 dark:group-hover:text-amber-400 transition duration-300">
+            <span className="font-serif text-sm md:text-lg font-bold text-stone-900 dark:text-stone-100 tracking-wide group-hover:text-amber-700 dark:group-hover:text-amber-400 transition duration-300 whitespace-nowrap">
               Divine Couture
             </span>
             <span className="text-[9px] tracking-[0.22em] text-stone-400 dark:text-stone-500 uppercase hidden md:block">
@@ -74,7 +74,7 @@ export default function DivineHeader() {
         </nav>
 
         {/* Actions */}
-        <div className="flex items-center gap-0.5 md:gap-1">
+        <div className="flex items-center gap-0 md:gap-1">
           <button
             className="p-2.5 hover:bg-stone-100 dark:hover:bg-white/[0.06] rounded-full transition duration-200"
             aria-label="Search"
