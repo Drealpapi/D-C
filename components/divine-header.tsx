@@ -7,9 +7,11 @@ import { useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
 import { useCart } from '@/lib/cart-context'
 import { useUserAuth } from '@/lib/user-auth-context'
+import SearchModal from '@/components/search-modal'
 
 export default function DivineHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
   const [mounted, setMounted]       = useState(false)
   const [scrolled, setScrolled]     = useState(false)
   const { theme, setTheme }         = useTheme()
@@ -53,7 +55,7 @@ export default function DivineHeader() {
             <span className="font-serif text-sm md:text-lg font-bold text-stone-900 dark:text-stone-100 tracking-wide group-hover:text-rose-700 dark:group-hover:text-amber-400 transition duration-300 whitespace-nowrap">
               Divine Couture
             </span>
-            <span className="text-[9px] tracking-[0.22em] text-rose-300 dark:text-stone-500 uppercase hidden md:block">
+            <span className="text-[9px] tracking-[0.22em] text-rose-400 dark:text-stone-500 uppercase hidden md:block font-medium">
               Indian Jewellery · UK
             </span>
           </div>
@@ -65,10 +67,14 @@ export default function DivineHeader() {
             <Link
               key={cat.name}
               href={cat.href}
-              className="relative text-sm font-medium text-stone-600 dark:text-stone-400 hover:text-rose-700 dark:hover:text-amber-400 transition duration-200 tracking-wide group"
+              className="relative text-sm font-medium text-stone-500 dark:text-stone-400 tracking-wide
+                         transition-all duration-300 ease-in
+                         hover:text-rose-600 dark:hover:text-amber-300
+                         hover:translate-y-[3px]
+                         hover:drop-shadow-[0_6px_10px_rgba(225,100,120,0.45)]
+                         dark:hover:drop-shadow-[0_6px_10px_rgba(251,191,36,0.4)]"
             >
               {cat.name}
-              <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-rose-400 dark:bg-amber-500 group-hover:w-full transition-all duration-300" />
             </Link>
           ))}
         </nav>
@@ -76,10 +82,11 @@ export default function DivineHeader() {
         {/* Actions */}
         <div className="flex items-center gap-0 md:gap-1">
           <button
-            className="p-2.5 hover:bg-stone-100 dark:hover:bg-white/[0.06] rounded-full transition duration-200"
+            onClick={() => setSearchOpen(true)}
+            className="icon-btn p-2.5 hover:bg-rose-50 dark:hover:bg-white/[0.06] rounded-full"
             aria-label="Search"
           >
-            <Search className="w-[18px] h-[18px] text-stone-600 dark:text-stone-400" />
+            <Search className="w-[18px] h-[18px] text-stone-500 dark:text-stone-400 transition-colors duration-200 hover:text-rose-500 dark:hover:text-amber-400" />
           </button>
 
           {/* Account — shows name if logged in */}
@@ -108,21 +115,21 @@ export default function DivineHeader() {
           ) : (
             <Link
               href="/profile"
-              className="p-2.5 hover:bg-stone-100 dark:hover:bg-white/[0.06] rounded-full transition duration-200"
+              className="p-2.5 hover:bg-rose-50 dark:hover:bg-white/[0.06] rounded-full transition duration-200"
               aria-label="Account"
             >
-              <User className="w-[18px] h-[18px] text-stone-600 dark:text-stone-400" />
+              <User className="w-[18px] h-[18px] text-stone-500 dark:text-stone-400" />
             </Link>
           )}
 
           <Link
             href="/cart"
-            className="p-2.5 hover:bg-stone-100 dark:hover:bg-white/[0.06] rounded-full transition duration-200 relative"
+            className="icon-btn p-2.5 hover:bg-rose-50 dark:hover:bg-white/[0.06] rounded-full relative"
             aria-label="Cart"
           >
-            <ShoppingBag className="w-[18px] h-[18px] text-stone-600 dark:text-stone-400" />
+            <ShoppingBag className="w-[18px] h-[18px] text-stone-500 dark:text-stone-400" />
             {itemCount > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 bg-amber-500 text-stone-900 text-[10px] rounded-full w-4 h-4 flex items-center justify-center font-bold shadow-sm">
+              <span className="absolute -top-0.5 -right-0.5 bg-rose-400 dark:bg-amber-500 text-white dark:text-stone-900 text-[10px] rounded-full w-4 h-4 flex items-center justify-center font-bold shadow-sm">
                 {itemCount}
               </span>
             )}
@@ -131,19 +138,19 @@ export default function DivineHeader() {
           {mounted && (
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="p-2.5 hover:bg-stone-100 dark:hover:bg-white/[0.06] rounded-full transition duration-200"
+              className="icon-btn p-2.5 hover:bg-rose-50 dark:hover:bg-white/[0.06] rounded-full"
               aria-label="Toggle theme"
             >
               {theme === 'dark'
-                ? <Sun  className="w-[18px] h-[18px] text-amber-400" />
-                : <Moon className="w-[18px] h-[18px] text-stone-500" />
+                ? <Sun  className="w-[18px] h-[18px] text-amber-400 transition-transform duration-500 hover:rotate-45" />
+                : <Moon className="w-[18px] h-[18px] text-rose-300 transition-transform duration-500 hover:-rotate-12" />
               }
             </button>
           )}
 
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2.5 hover:bg-stone-100 dark:hover:bg-white/[0.06] rounded-full transition duration-200"
+            className="icon-btn lg:hidden p-2.5 hover:bg-rose-50 dark:hover:bg-white/[0.06] rounded-full"
             aria-label="Menu"
           >
             {isMenuOpen
@@ -154,65 +161,107 @@ export default function DivineHeader() {
         </div>
       </div>
 
-      {/* Mobile nav */}
+      {/* Mobile nav — full screen overlay */}
       <div
-        className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          isMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+        className={`lg:hidden fixed inset-0 z-40 transition-all duration-300 ease-in-out ${
+          isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
-        <nav className="border-t border-rose-50 dark:border-white/[0.05] bg-[#fdf8f8]/98 dark:bg-[#0d0f1a]/98 backdrop-blur-xl px-5 py-4 space-y-0.5">
-          {categories.map((cat) => (
-            <Link
-              key={cat.name}
-              href={cat.href}
-              className="flex items-center justify-between text-sm font-medium text-stone-700 dark:text-stone-300 hover:text-rose-700 dark:hover:text-amber-400 py-3.5 border-b border-rose-50 dark:border-white/[0.04] transition duration-200"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {cat.name}
-              <span className="text-rose-200 dark:text-stone-600 text-xs">→</span>
-            </Link>
-          ))}
+        {/* Blush backdrop */}
+        <div className="absolute inset-0 bg-[#fdf6f7]/97 dark:bg-[#0d0f1a]/97 backdrop-blur-xl" />
 
-          {/* Mobile auth section */}
-          {mounted && isLoggedIn ? (
-            <div className="pt-4 pb-1 space-y-2">
+        {/* Top bar inside overlay */}
+        <div className="relative z-10 flex items-center justify-between px-5 py-4 border-b border-rose-100/60 dark:border-white/[0.05]">
+          <Link href="/" className="flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
+            <ThemeLogo size={28} />
+            <span className="font-serif text-sm font-bold text-stone-900 dark:text-stone-100">Divine Couture</span>
+          </Link>
+          <button
+            onClick={() => setIsMenuOpen(false)}
+            className="p-2 rounded-full bg-rose-100/60 dark:bg-white/[0.06] text-stone-600 dark:text-stone-300"
+            aria-label="Close menu"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Nav links */}
+        <nav className="relative z-10 px-6 pt-8 pb-6">
+          <p className="text-[10px] uppercase tracking-[0.25em] text-rose-300 dark:text-white/20 mb-5">Shop</p>
+          <div className="space-y-1">
+            {categories.map((cat, i) => (
               <Link
-                href="/profile"
-                className="flex items-center gap-3 py-2.5 text-sm text-stone-700 dark:text-stone-300"
+                key={cat.name}
+                href={cat.href}
                 onClick={() => setIsMenuOpen(false)}
+                className="flex items-center justify-between py-4 border-b border-rose-100/50 dark:border-white/[0.04] group"
+                style={{ transitionDelay: `${i * 60}ms` }}
               >
-                <div className="w-7 h-7 rounded-full bg-amber-500 flex items-center justify-center shrink-0">
-                  <span className="text-[11px] font-bold text-stone-900">{user?.name.charAt(0)}</span>
-                </div>
-                <span className="font-medium">{user?.name}</span>
+                <span className="font-serif text-2xl text-stone-800 dark:text-stone-100 group-hover:text-rose-500 dark:group-hover:text-amber-400 transition duration-200">
+                  {cat.name}
+                </span>
+                <span className="text-rose-300 dark:text-stone-600 text-lg group-hover:translate-x-1 transition-transform duration-200">→</span>
               </Link>
-              <button
-                onClick={() => { logout(); setIsMenuOpen(false) }}
-                className="w-full text-left py-2.5 text-sm text-stone-400 dark:text-stone-500 flex items-center gap-2 hover:text-stone-700 dark:hover:text-stone-300 transition"
-              >
-                <LogOut className="w-4 h-4" /> Sign Out
-              </button>
-            </div>
-          ) : (
-            <div className="pt-4 pb-1 flex gap-3">
-              <Link
-                href="/login"
-                className="flex-1 text-center py-2.5 text-xs tracking-widest uppercase border border-stone-200 dark:border-white/10 text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-white/[0.05] transition rounded-sm"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Sign In
-              </Link>
-              <Link
-                href="/register"
-                className="flex-1 text-center py-2.5 text-xs tracking-widest uppercase bg-rose-400 text-white hover:bg-rose-500 dark:bg-amber-500 dark:text-stone-900 dark:hover:bg-amber-400 transition rounded-sm font-semibold"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Register
-              </Link>
-            </div>
-          )}
+            ))}
+          </div>
+
+          {/* Auth section */}
+          <div className="mt-8">
+            {mounted && isLoggedIn ? (
+              <div className="space-y-3">
+                <Link
+                  href="/profile"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex items-center gap-3 p-3 bg-rose-50/80 dark:bg-white/[0.03] rounded-xl border border-rose-100/60 dark:border-white/[0.05]"
+                >
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-rose-300 to-rose-500 dark:from-amber-400 dark:to-amber-600 flex items-center justify-center shrink-0">
+                    <span className="text-sm font-bold text-white">{user?.name.charAt(0)}</span>
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-stone-800 dark:text-stone-200">{user?.name}</p>
+                    <p className="text-[11px] text-rose-400 dark:text-stone-500">View profile →</p>
+                  </div>
+                </Link>
+                <button
+                  onClick={() => { logout(); setIsMenuOpen(false) }}
+                  className="w-full flex items-center gap-2 py-2.5 text-sm text-stone-400 dark:text-stone-500 hover:text-rose-500 dark:hover:text-stone-300 transition"
+                >
+                  <LogOut className="w-4 h-4" /> Sign Out
+                </button>
+              </div>
+            ) : (
+              <div className="flex gap-3">
+                <Link
+                  href="/login"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex-1 text-center py-3 text-xs tracking-widest uppercase border border-rose-200 dark:border-white/10 text-stone-700 dark:text-stone-300 hover:bg-rose-50 dark:hover:bg-white/[0.05] transition rounded-sm font-medium"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  href="/register"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex-1 text-center py-3 text-xs tracking-widest uppercase bg-rose-400 text-white hover:bg-rose-500 dark:bg-amber-500 dark:text-stone-900 dark:hover:bg-amber-400 transition rounded-sm font-bold"
+                >
+                  Register
+                </Link>
+              </div>
+            )}
+          </div>
+
+          {/* Bottom trust line */}
+          <div className="mt-10 pt-6 border-t border-rose-100/40 dark:border-white/[0.04] flex items-center justify-center gap-5">
+            {['Handcrafted', 'UK Delivery', 'Bridal Specialists'].map((b, i) => (
+              <div key={b} className="flex items-center gap-2">
+                {i > 0 && <div className="w-px h-3 bg-rose-200/60 dark:bg-white/10" />}
+                <span className="text-[10px] text-rose-300 dark:text-stone-500 tracking-wider">{b}</span>
+              </div>
+            ))}
+          </div>
         </nav>
       </div>
+      {/* Search modal */}
+      <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
     </header>
   )
 }

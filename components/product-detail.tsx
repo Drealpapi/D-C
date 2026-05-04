@@ -35,7 +35,7 @@ export default function ProductDetail({ product, related }: { product: Product; 
       {/* Breadcrumb */}
       <Link
         href={`/shop/${categoryRoute}`}
-        className="inline-flex items-center gap-1.5 text-xs text-stone-400 dark:text-white/30 hover:text-amber-600 dark:hover:text-amber-400 transition mb-8 group capitalize"
+        className="inline-flex items-center gap-1.5 text-xs text-rose-300 dark:text-white/30 hover:text-rose-600 dark:hover:text-amber-400 transition mb-8 group capitalize"
       >
         <ChevronLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5" />
         Back to {product.category}
@@ -59,12 +59,12 @@ export default function ProductDetail({ product, related }: { product: Product; 
             {/* Badges */}
             <div className="absolute top-4 left-4 flex flex-col gap-2">
               {product.isNew && (
-                <span className="bg-stone-900 dark:bg-amber-500 text-white dark:text-stone-900 text-[10px] px-3 py-1 tracking-[0.18em] uppercase font-bold">
+                <span className="bg-rose-400 dark:bg-amber-500 text-white dark:text-stone-900 text-[10px] px-3 py-1 tracking-[0.18em] uppercase font-bold">
                   New
                 </span>
               )}
               {product.isOnSale && discount > 0 && (
-                <span className="bg-amber-600 text-white text-[10px] px-3 py-1 tracking-[0.18em] uppercase font-bold">
+                <span className="bg-rose-600 dark:bg-amber-600 text-white text-[10px] px-3 py-1 tracking-[0.18em] uppercase font-bold">
                   −{discount}%
                 </span>
               )}
@@ -83,8 +83,8 @@ export default function ProductDetail({ product, related }: { product: Product; 
               { icon: Truck,     text: 'UK Delivery' },
               { icon: RotateCcw, text: '30-Day Returns' },
             ].map(({ icon: Icon, text }) => (
-              <div key={text} className="flex flex-col items-center gap-1.5 py-3 bg-stone-50 dark:bg-white/[0.02] border border-stone-100 dark:border-white/[0.05]">
-                <Icon className="w-3.5 h-3.5 text-amber-500" />
+              <div key={text} className="flex flex-col items-center gap-1.5 py-3 bg-rose-50/60 dark:bg-white/[0.02] border border-rose-100/80 dark:border-white/[0.05]">
+                <Icon className="w-3.5 h-3.5 text-rose-400 dark:text-amber-500" />
                 <span className="text-[10px] text-stone-500 dark:text-white/30 tracking-wide text-center">{text}</span>
               </div>
             ))}
@@ -96,8 +96,8 @@ export default function ProductDetail({ product, related }: { product: Product; 
 
           {/* Category */}
           <div className="flex items-center gap-2 mb-4">
-            <div className="h-px w-6 bg-amber-500" />
-            <p className="text-[11px] uppercase tracking-[0.22em] text-amber-600 dark:text-amber-400 capitalize">
+            <div className="h-px w-6 bg-rose-300 dark:bg-amber-500" />
+            <p className="text-[11px] uppercase tracking-[0.22em] text-rose-400 dark:text-amber-400 capitalize">
               {product.category}
             </p>
           </div>
@@ -111,7 +111,7 @@ export default function ProductDetail({ product, related }: { product: Product; 
           <div className="flex items-center gap-2 mb-5">
             <div className="flex gap-0.5">
               {[1,2,3,4,5].map((s) => (
-                <Star key={s} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                <Star key={s} className="w-3.5 h-3.5 fill-rose-300 text-rose-300 dark:fill-amber-400 dark:text-amber-400" />
               ))}
             </div>
             <span className="text-xs text-stone-400 dark:text-white/30">(24 reviews)</span>
@@ -128,7 +128,7 @@ export default function ProductDetail({ product, related }: { product: Product; 
               </span>
             )}
             {discount > 0 && (
-              <span className="text-xs font-bold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/10 px-2 py-0.5 rounded-sm">
+              <span className="text-xs font-bold text-rose-500 dark:text-amber-400 bg-rose-50 dark:bg-amber-500/10 px-2 py-0.5 rounded-sm">
                 {discount}% off
               </span>
             )}
@@ -154,8 +154,8 @@ export default function ProductDetail({ product, related }: { product: Product; 
                     onClick={() => setSelectedSize(size)}
                     className={`px-4 py-2.5 text-sm border transition-all duration-200 ${
                       selectedSize === size
-                        ? 'bg-stone-900 dark:bg-amber-500 text-white dark:text-stone-900 border-stone-900 dark:border-amber-500 shadow-sm'
-                        : 'bg-white dark:bg-white/[0.03] text-stone-700 dark:text-white/60 border-stone-200 dark:border-white/[0.08] hover:border-amber-500 dark:hover:border-amber-500/50 hover:text-amber-700 dark:hover:text-amber-400'
+                        ? 'bg-rose-400 dark:bg-amber-500 text-white dark:text-stone-900 border-rose-400 dark:border-amber-500 shadow-sm'
+                        : 'bg-white dark:bg-white/[0.03] text-stone-700 dark:text-white/60 border-rose-100 dark:border-white/[0.08] hover:border-rose-300 dark:hover:border-amber-500/50 hover:text-rose-600 dark:hover:text-amber-400'
                     }`}
                   >
                     {size}
@@ -171,7 +171,7 @@ export default function ProductDetail({ product, related }: { product: Product; 
             className={`w-full py-4 flex items-center justify-center gap-2.5 text-xs font-bold tracking-[0.2em] uppercase transition-all duration-300 ${
               added
                 ? 'bg-emerald-600 text-white shadow-[0_8px_24px_rgba(16,185,129,0.25)]'
-                : 'bg-stone-900 dark:bg-amber-500 text-white dark:text-stone-900 hover:bg-amber-700 dark:hover:bg-amber-400 hover:shadow-[0_8px_30px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_8px_30px_rgba(212,175,55,0.2)]'
+                : 'bg-rose-400 dark:bg-amber-500 text-white dark:text-stone-900 hover:bg-rose-500 dark:hover:bg-amber-400 hover:shadow-[0_8px_30px_rgba(244,114,182,0.25)] dark:hover:shadow-[0_8px_30px_rgba(212,175,55,0.2)]'
             }`}
           >
             {added
@@ -181,14 +181,14 @@ export default function ProductDetail({ product, related }: { product: Product; 
           </button>
 
           {/* Perks */}
-          <div className="mt-8 pt-8 border-t border-stone-100 dark:border-white/[0.05] space-y-2.5">
+          <div className="mt-8 pt-8 border-t border-rose-100/80 dark:border-white/[0.05] space-y-2.5">
             {[
               '✦ Free UK delivery on orders over £75',
               '✦ Handcrafted & quality checked',
               '✦ Easy 30-day returns',
               '✦ Secure checkout',
             ].map((perk) => (
-              <p key={perk} className="text-xs text-stone-400 dark:text-white/25 tracking-wide">{perk}</p>
+              <p key={perk} className="text-xs text-rose-300 dark:text-white/25 tracking-wide">{perk}</p>
             ))}
           </div>
         </div>
@@ -199,7 +199,7 @@ export default function ProductDetail({ product, related }: { product: Product; 
         <div>
           <div className="flex items-center gap-4 mb-10">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.22em] text-amber-600 dark:text-amber-400 mb-2">You May Also Like</p>
+              <p className="text-[11px] uppercase tracking-[0.22em] text-rose-400 dark:text-amber-400 mb-2">You May Also Like</p>
               <h2 className="font-serif text-2xl md:text-3xl text-stone-900 dark:text-white/90">Related Pieces</h2>
             </div>
             <div className="flex-1 h-px bg-gradient-to-r from-stone-200 dark:from-white/[0.06] to-transparent hidden md:block" />

@@ -134,7 +134,7 @@ export default function DivineFooter() {
               />
               <button
                 type="submit"
-                className="px-4 py-2.5 bg-amber-500 text-stone-900 text-xs font-bold tracking-wider uppercase hover:bg-amber-400 transition rounded-sm shrink-0"
+                className="px-4 py-2.5 bg-rose-400 text-white text-xs font-bold tracking-wider uppercase hover:bg-rose-500 transition rounded-sm shrink-0"
               >
                 Join
               </button>
