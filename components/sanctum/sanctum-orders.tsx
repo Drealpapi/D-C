@@ -1,0 +1,218 @@
+'use client'
+
+import { useState, useMemo } from 'react'
+import { Search, X, ChevronDown, Trash2, Eye, ShoppingBag } from 'lucide-react'
+import { useAdmin, type AdminOrder, type OrderStatus } from '@/lib/admin-context'
+
+const STATUS_CONFIG: Record<OrderStatus, { label: string; color: string; bg: string }> = {
+  pending:    { label: 'Pending',    color: 'text-amber-400',  bg: 'bg-amber-500/10' },
+  processing: { label: 'Processing', color: 'text-sky-400',    bg: 'bg-sky-500/10' },
+  shipped:    { label: 'Shipped',    color: 'text-violet-400', bg: 'bg-violet-500/10' },
+  delivered:  { label: 'Delivered',  color: 'text-emerald-400',bg: 'bg-emerald-500/10' },
+  cancelled:  { label: 'Cancelled',  color: 'text-rose-400',   bg: 'bg-rose-500/10' },
+}
+
+const ALL_STATUSES: OrderStatus[] = ['pending', 'processing', 'shipped', 'delivered', 'cancelled']
+
+export default function SanctumOrders() {
+  const { orders, updateOrderStatus, deleteOrder } = useAdmin()
+  const [query, setQuery]               = useState('')
+  const [statusFilter, setStatusFilter] = useState<OrderStatus | 'all'>('all')
+  const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null)
+  const [expandedId, setExpandedId]     = useState<string | null>(null)
+
+  const filtered = useMemo(() => {
+    const q = query.toLowerCase().trim()
+    return orders.filter((o) => {
+      const matchQ = !q || o.id.toLowerCase().includes(q) || o.customer.toLowerCase().includes(q) || o.email.toLowerCase().includes(q)
+      const matchS = statusFilter === 'all' || o.status === statusFilter
+      return matchQ && matchS
+    })
+  }, [orders, query, statusFilter])
+
+  const stats = useMemo(() => ({
+    total:      orders.length,
+    pending:    orders.filter((o) => o.status === 'pending').length,
+    processing: orders.filter((o) => o.status === 'processing').length,
+    shipped:    orders.filter((o) => o.status === 'shipped').length,
+    delivered:  orders.filter((o) => o.status === 'delivered').length,
+    revenue:    orders.filter((o) => o.status !== 'cancelled').reduce((s, o) => s + o.total, 0),
+  }), [orders])
+
+  return (
+    <div className="space-y-6 animate-fade-in">
+
+      {/* Header */}
+      <div>
+        <p className="text-[11px] uppercase tracking-[0.22em] text-amber-500/70 mb-1">Fulfilment</p>
+        <h1 className="font-serif text-2xl md:text-3xl text-white/90">Orders</h1>
+      </div>
+
+      {/* Stats */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        {[
+          { label: 'Total',      value: stats.total,                    color: 'text-white/70' },
+          { label: 'Pending',    value: stats.pending,                  color: 'text-amber-400' },
+          { label: 'Processing', value: stats.processing,               color: 'text-sky-400' },
+          { label: 'Shipped',    value: stats.shipped,                  color: 'text-violet-400' },
+          { label: 'Delivered',  value: stats.delivered,                color: 'text-emerald-400' },
+          { label: 'Revenue',    value: `£${stats.revenue.toLocaleString()}`, color: 'text-amber-300' },
+        ].map(({ label, value, color }) => (
+          <div key={label} className="bg-[#13141a] border border-white/[0.06] rounded-xl px-4 py-3 text-center">
+            <p className={`text-lg font-bold ${color}`}>{value}</p>
+            <p className="text-[10px] text-white/30 uppercase tracking-wider mt-0.5">{label}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Search + filter */}
+      <div className="flex flex-col sm:flex-row gap-3">
+        <div className="relative flex-1">
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/25 pointer-events-none" />
+          <input
+            type="text" value={query} onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search by order ID, customer or email…"
+            className="w-full pl-10 pr-9 py-2.5 text-sm bg-[#13141a] border border-white/[0.06] rounded-xl text-white/70 placeholder:text-white/20 focus:outline-none focus:border-amber-500/50 transition"
+          />
+          {query && (
+            <button onClick={() => setQuery('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-white/25 hover:text-white/60 transition">
+              <X className="w-3.5 h-3.5" />
+            </button>
+          )}
+        </div>
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value as OrderStatus | 'all')}
+          className="px-4 py-2.5 text-sm bg-[#13141a] border border-white/[0.06] rounded-xl text-white/60 focus:outline-none focus:border-amber-500/50 transition"
+        >
+          <option value="all">All Statuses</option>
+          {ALL_STATUSES.map((s) => (
+            <option key={s} value={s}>{STATUS_CONFIG[s].label}</option>
+          ))}
+        </select>
+      </div>
+
+      {/* Orders table */}
+      <div className="bg-[#13141a] border border-white/[0.06] rounded-2xl overflow-hidden">
+        {filtered.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-16 text-center">
+            <ShoppingBag className="w-10 h-10 text-white/10 mb-3" />
+            <p className="text-white/30 text-sm">No orders found</p>
+          </div>
+        ) : (
+          <div className="divide-y divide-white/[0.04]">
+            {filtered.map((order) => {
+              const cfg = STATUS_CONFIG[order.status]
+              const isExpanded = expandedId === order.id
+              return (
+                <div key={order.id}>
+                  {/* Row */}
+                  <div className="flex items-center gap-3 px-5 py-4 hover:bg-white/[0.02] transition">
+                    {/* Order ID */}
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-mono text-amber-400/80">{order.id}</p>
+                      <p className="text-xs text-white/40 mt-0.5">{order.date}</p>
+                    </div>
+
+                    {/* Customer */}
+                    <div className="hidden sm:block min-w-0 flex-1">
+                      <p className="text-sm text-white/80 truncate">{order.customer}</p>
+                      <p className="text-xs text-white/30 truncate">{order.email}</p>
+                    </div>
+
+                    {/* Total */}
+                    <div className="hidden md:block w-20 text-right">
+                      <p className="text-sm font-semibold text-white/80">£{order.total}</p>
+                      <p className="text-xs text-white/30">{order.items.length} item{order.items.length !== 1 ? 's' : ''}</p>
+                    </div>
+
+                    {/* Status selector */}
+                    <div className="relative">
+                      <select
+                        value={order.status}
+                        onChange={(e) => updateOrderStatus(order.id, e.target.value as OrderStatus)}
+                        className={`appearance-none pl-3 pr-7 py-1.5 text-xs font-medium rounded-full border-0 focus:outline-none focus:ring-1 focus:ring-amber-500/40 cursor-pointer transition ${cfg.color} ${cfg.bg}`}
+                      >
+                        {ALL_STATUSES.map((s) => (
+                          <option key={s} value={s} className="bg-[#13141a] text-white/70">
+                            {STATUS_CONFIG[s].label}
+                          </option>
+                        ))}
+                      </select>
+                      <ChevronDown className={`absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 pointer-events-none ${cfg.color}`} />
+                    </div>
+
+                    {/* Actions */}
+                    <div className="flex items-center gap-1">
+                      <button
+                        onClick={() => setExpandedId(isExpanded ? null : order.id)}
+                        className="p-1.5 rounded-lg text-white/30 hover:text-white/70 hover:bg-white/[0.06] transition"
+                        title="View details"
+                      >
+                        <Eye className="w-4 h-4" />
+                      </button>
+                      {deleteConfirm === order.id ? (
+                        <div className="flex items-center gap-1">
+                          <button
+                            onClick={() => { deleteOrder(order.id); setDeleteConfirm(null) }}
+                            className="px-2 py-1 text-xs bg-rose-500 text-white rounded-lg hover:bg-rose-400 transition"
+                          >
+                            Delete
+                          </button>
+                          <button
+                            onClick={() => setDeleteConfirm(null)}
+                            className="px-2 py-1 text-xs bg-white/[0.06] text-white/50 rounded-lg hover:bg-white/[0.1] transition"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() => setDeleteConfirm(order.id)}
+                          className="p-1.5 rounded-lg text-white/20 hover:text-rose-400 hover:bg-rose-500/10 transition"
+                          title="Delete order"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Expanded detail */}
+                  {isExpanded && (
+                    <div className="px-5 pb-5 bg-white/[0.015] border-t border-white/[0.04]">
+                      <div className="grid sm:grid-cols-2 gap-6 pt-4">
+                        {/* Items */}
+                        <div>
+                          <p className="text-[10px] uppercase tracking-[0.18em] text-white/30 mb-3">Items</p>
+                          <div className="space-y-2">
+                            {order.items.map((item, i) => (
+                              <div key={i} className="flex items-center justify-between">
+                                <span className="text-sm text-white/70">{item.name} × {item.qty}</span>
+                                <span className="text-sm text-white/50">£{item.price * item.qty}</span>
+                              </div>
+                            ))}
+                            <div className="flex items-center justify-between pt-2 border-t border-white/[0.06]">
+                              <span className="text-sm font-semibold text-white/80">Total</span>
+                              <span className="text-sm font-bold text-amber-400">£{order.total}</span>
+                            </div>
+                          </div>
+                        </div>
+                        {/* Delivery */}
+                        <div>
+                          <p className="text-[10px] uppercase tracking-[0.18em] text-white/30 mb-3">Delivery Address</p>
+                          <p className="text-sm text-white/60 leading-relaxed">{order.address}</p>
+                          <p className="text-[10px] text-white/30 mt-3">Customer: {order.email}</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}

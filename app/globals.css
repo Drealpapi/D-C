@@ -1,0 +1,241 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* ─────────────────────────────────────────────
+   LIGHT: Champagne ivory — warm, bridal luxury
+   Inspired by Sabyasachi / Indian couture houses
+───────────────────────────────────────────── */
+:root {
+  --background:           oklch(0.975 0.008 78);   /* warm champagne white */
+  --foreground:           oklch(0.15 0.012 40);    /* deep warm charcoal */
+  --card:                 oklch(1 0.004 78);
+  --card-foreground:      oklch(0.15 0.012 40);
+  --popover:              oklch(1 0.004 78);
+  --popover-foreground:   oklch(0.15 0.012 40);
+  --primary:              oklch(0.14 0.012 40);    /* near-black charcoal */
+  --primary-foreground:   oklch(0.975 0.008 78);
+  --secondary:            oklch(0.68 0.13 72);     /* warm gold */
+  --secondary-foreground: oklch(0.15 0.012 40);
+  --muted:                oklch(0.94 0.010 75);
+  --muted-foreground:     oklch(0.46 0.010 55);
+  --accent:               oklch(0.68 0.13 72);     /* gold accent */
+  --accent-foreground:    oklch(0.15 0.012 40);
+  --destructive:          oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(1 0 0);
+  --border:               oklch(0.88 0.010 72);
+  --input:                oklch(0.94 0.010 75);
+  --ring:                 oklch(0.68 0.13 72);
+  --radius:               0.2rem;
+
+  /* Brand gold */
+  --gold:                 oklch(0.72 0.14 72);
+  --gold-light:           oklch(0.88 0.10 78);
+  --gold-dark:            oklch(0.55 0.14 65);
+}
+
+/* ─────────────────────────────────────────────
+   DARK: Deep midnight indigo — regal, jewel-box
+   Like velvet display cases in a luxury boutique
+───────────────────────────────────────────── */
+.dark {
+  --background:           oklch(0.11 0.018 265);   /* deep midnight indigo */
+  --foreground:           oklch(0.93 0.008 75);    /* warm ivory white */
+  --card:                 oklch(0.15 0.020 265);   /* slightly lighter indigo */
+  --card-foreground:      oklch(0.93 0.008 75);
+  --popover:              oklch(0.15 0.020 265);
+  --popover-foreground:   oklch(0.93 0.008 75);
+  --primary:              oklch(0.78 0.14 75);     /* warm gold — primary CTA */
+  --primary-foreground:   oklch(0.11 0.018 265);
+  --secondary:            oklch(0.19 0.022 265);
+  --secondary-foreground: oklch(0.93 0.008 75);
+  --muted:                oklch(0.17 0.020 265);
+  --muted-foreground:     oklch(0.60 0.012 70);
+  --accent:               oklch(0.78 0.14 75);     /* gold */
+  --accent-foreground:    oklch(0.11 0.018 265);
+  --destructive:          oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(1 0 0);
+  --border:               oklch(0.22 0.022 265);
+  --input:                oklch(0.17 0.020 265);
+  --ring:                 oklch(0.78 0.14 75);
+
+  /* Brand gold */
+  --gold:                 oklch(0.78 0.14 75);
+  --gold-light:           oklch(0.88 0.10 78);
+  --gold-dark:            oklch(0.62 0.14 68);
+}
+
+@theme inline {
+  --font-sans:  'Inter', 'Inter Fallback';
+  --font-serif: 'Lora', 'Lora Fallback';
+  --color-background:           var(--background);
+  --color-foreground:           var(--foreground);
+  --color-card:                 var(--card);
+  --color-card-foreground:      var(--card-foreground);
+  --color-popover:              var(--popover);
+  --color-popover-foreground:   var(--popover-foreground);
+  --color-primary:              var(--primary);
+  --color-primary-foreground:   var(--primary-foreground);
+  --color-secondary:            var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted:                var(--muted);
+  --color-muted-foreground:     var(--muted-foreground);
+  --color-accent:               var(--accent);
+  --color-accent-foreground:    var(--accent-foreground);
+  --color-destructive:          var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border:               var(--border);
+  --color-input:                var(--input);
+  --color-ring:                 var(--ring);
+  --radius-sm:  calc(var(--radius) - 2px);
+  --radius-md:  var(--radius);
+  --radius-lg:  calc(var(--radius) + 4px);
+  --radius-xl:  calc(var(--radius) + 8px);
+}
+
+* { border-color: var(--border); }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  transition: background-color 0.3s ease, color 0.2s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Custom scale utility ── */
+.group:hover .group-hover\:scale-108,
+.scale-108 { transform: scale(1.08); }
+
+/* ── Scroll-reveal base ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* stagger delays */
+.delay-100 { transition-delay: 0.10s; }
+.delay-200 { transition-delay: 0.20s; }
+.delay-300 { transition-delay: 0.30s; }
+.delay-400 { transition-delay: 0.40s; }
+.delay-500 { transition-delay: 0.50s; }
+
+/* ── Gold shimmer on hover ── */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+.gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    oklch(0.72 0.14 72) 0%,
+    oklch(0.88 0.10 78) 40%,
+    oklch(0.72 0.14 72) 60%,
+    oklch(0.55 0.14 65) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+/* ── Floating particles ── */
+@keyframes float-up {
+  0%   { transform: translateY(0) translateX(0) scale(1);   opacity: 0; }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.3; }
+  100% { transform: translateY(-100vh) translateX(var(--drift)) scale(0.5); opacity: 0; }
+}
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: float-up var(--dur) ease-in infinite;
+  animation-delay: var(--delay);
+}
+
+/* ── Subtle grain texture overlay ── */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+}
+
+/* ── Glass morphism ── */
+.glass {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background: oklch(0.975 0.008 78 / 0.85);
+}
+.dark .glass {
+  background: oklch(0.11 0.018 265 / 0.82);
+}
+
+/* ── Gold divider ── */
+.gold-divider {
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, oklch(0.72 0.14 72), transparent);
+  margin: 0 auto;
+}
+
+/* ── Keyframes ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.animate-fade-up       { animation: fadeUp      0.7s cubic-bezier(0.22,1,0.36,1) forwards; }
+.animate-fade-in       { animation: fadeIn      0.5s ease forwards; }
+.animate-scale-in      { animation: scaleIn     0.6s cubic-bezier(0.22,1,0.36,1) forwards; }
+.animate-slide-left    { animation: slideInLeft 0.7s cubic-bezier(0.22,1,0.36,1) forwards; }
+.animate-slide-right   { animation: slideInRight 0.7s cubic-bezier(0.22,1,0.36,1) forwards; }
