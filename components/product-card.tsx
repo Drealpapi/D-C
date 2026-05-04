@@ -7,7 +7,7 @@ import type { Product } from '@/lib/product-data'
 import { useCart } from '@/lib/cart-context'
 import { ShoppingBag, Check } from 'lucide-react'
 
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({ product, featured = false }: { product: Product; featured?: boolean }) {
   const { addItem } = useCart()
   const [added, setAdded] = useState(false)
 
@@ -33,7 +33,7 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <Link href={`/product/${product.id}`} className="group block">
       {/* Image container */}
-      <div className="relative aspect-square overflow-hidden bg-stone-100 dark:bg-stone-900/60 mb-3.5">
+      <div className={`relative overflow-hidden bg-stone-100 dark:bg-stone-900/60 mb-3.5 ${featured ? 'aspect-[4/3]' : 'aspect-square'}`}>
         <Image
           src={product.image}
           alt={product.name}

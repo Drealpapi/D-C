@@ -168,20 +168,20 @@ export default function DivineHero({ title, subtitle, ctaText, ctaHref }: Divine
             {subtitle}
           </p>
 
-          {/* CTAs — stacked on mobile, side by side on sm+ */}
-          <div className="flex flex-col sm:flex-row gap-3 animate-fade-up" style={{ animationDelay: '0.55s' }}>
+          {/* CTAs — always side by side, compact */}
+          <div className="flex flex-row gap-2.5 animate-fade-up" style={{ animationDelay: '0.55s' }}>
             <Link
               href={ctaHref}
-              className="group relative inline-flex items-center justify-center gap-2 px-7 py-3 md:py-3.5 bg-amber-500 text-stone-900 text-xs font-bold tracking-[0.15em] uppercase transition-all duration-300 hover:bg-amber-400 hover:shadow-[0_0_30px_rgba(212,175,55,0.4)]"
+              className="group relative inline-flex items-center gap-2 px-5 md:px-8 py-2.5 md:py-3.5 bg-rose-400 dark:bg-amber-500 text-white dark:text-stone-900 text-[11px] md:text-xs font-bold tracking-[0.12em] md:tracking-[0.15em] uppercase transition-all duration-300 hover:bg-rose-500 dark:hover:bg-amber-400 hover:shadow-[0_0_30px_rgba(244,114,182,0.35)] dark:hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] whitespace-nowrap"
             >
               <span>{ctaText}</span>
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
             </Link>
             <Link
               href="/shop/collections"
-              className="inline-flex items-center justify-center gap-2 px-7 py-3 md:py-3.5 border border-white/40 text-white text-xs font-medium tracking-[0.15em] uppercase hover:border-amber-400/70 hover:text-amber-300 transition-all duration-300 backdrop-blur-sm"
+              className="inline-flex items-center gap-2 px-5 md:px-8 py-2.5 md:py-3.5 border border-white/40 text-white text-[11px] md:text-xs font-medium tracking-[0.12em] md:tracking-[0.15em] uppercase hover:border-rose-300/70 dark:hover:border-amber-400/70 hover:text-rose-200 dark:hover:text-amber-300 transition-all duration-300 backdrop-blur-sm whitespace-nowrap"
             >
-              Our Collections
+              Collections
             </Link>
           </div>
 

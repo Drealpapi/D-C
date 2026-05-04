@@ -7,7 +7,7 @@ import { useCart } from '@/lib/cart-context'
 import { useUserAuth } from '@/lib/user-auth-context'
 import { ShoppingBag, Lock, CheckCircle2, ChevronRight, Truck, Shield, RotateCcw } from 'lucide-react'
 
-const inputCls = "w-full border border-stone-200 dark:border-white/10 bg-stone-50 dark:bg-white/[0.04] px-4 py-3.5 text-sm text-stone-800 dark:text-stone-200 placeholder:text-stone-300 dark:placeholder:text-white/20 focus:outline-none focus:border-amber-500 dark:focus:border-amber-500/60 transition rounded-sm"
+const inputCls = "w-full border border-rose-100 dark:border-white/10 bg-rose-50/40 dark:bg-white/[0.04] px-4 py-3.5 text-sm text-stone-800 dark:text-stone-200 placeholder:text-stone-300 dark:placeholder:text-white/20 focus:outline-none focus:border-rose-400 dark:focus:border-amber-500/60 transition rounded-sm"
 const labelCls = "block text-[11px] uppercase tracking-[0.18em] text-stone-500 dark:text-stone-400 mb-2 font-medium"
 
 const STEPS = ['Bag', 'Details', 'Payment', 'Confirm']
@@ -38,16 +38,16 @@ export default function CheckoutView() {
           <div className="w-20 h-20 rounded-full bg-emerald-50 dark:bg-emerald-500/10 flex items-center justify-center mx-auto mb-6">
             <CheckCircle2 className="w-10 h-10 text-emerald-500" />
           </div>
-          <p className="text-[11px] uppercase tracking-[0.22em] text-amber-600 dark:text-amber-400 mb-3">Order Placed</p>
+          <p className="text-[11px] uppercase tracking-[0.22em] text-rose-400 dark:text-amber-400 mb-3">Order Placed</p>
           <h1 className="font-serif text-3xl text-stone-900 dark:text-stone-100 mb-3">Thank You{user ? `, ${user.name.split(' ')[0]}` : ''}!</h1>
           <p className="text-stone-500 dark:text-stone-400 text-sm mb-2">Your order has been confirmed.</p>
           <p className="text-stone-400 dark:text-stone-500 text-xs mb-10">A confirmation email will be sent to <span className="text-stone-600 dark:text-stone-300">{user?.email}</span></p>
-          <div className="h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent mb-8" />
+          <div className="h-px bg-gradient-to-r from-transparent via-rose-300/40 dark:via-amber-500/30 to-transparent mb-8" />
           <div className="flex gap-3 justify-center">
-            <Link href="/" className="px-6 py-3 bg-stone-900 dark:bg-amber-500 text-white dark:text-stone-900 text-xs font-bold tracking-widest uppercase hover:bg-amber-700 dark:hover:bg-amber-400 transition">
+            <Link href="/" className="px-6 py-3 bg-rose-400 dark:bg-amber-500 text-white dark:text-stone-900 text-xs font-bold tracking-widest uppercase hover:bg-rose-500 dark:hover:bg-amber-400 transition">
               Continue Shopping
             </Link>
-            <Link href="/profile" className="px-6 py-3 border border-stone-200 dark:border-white/10 text-stone-700 dark:text-stone-300 text-xs font-medium tracking-widest uppercase hover:border-stone-400 dark:hover:border-white/20 transition">
+            <Link href="/profile" className="px-6 py-3 border border-rose-200 dark:border-white/10 text-stone-700 dark:text-stone-300 text-xs font-medium tracking-widest uppercase hover:border-rose-300 dark:hover:border-white/20 transition">
               My Orders
             </Link>
           </div>
@@ -64,7 +64,7 @@ export default function CheckoutView() {
           <ShoppingBag className="w-12 h-12 text-stone-300 dark:text-stone-600 mx-auto mb-4" />
           <h1 className="font-serif text-2xl text-stone-900 dark:text-stone-100 mb-3">Your bag is empty</h1>
           <p className="text-stone-400 dark:text-stone-500 text-sm mb-8">Add some pieces before checking out.</p>
-          <Link href="/shop/earrings" className="inline-block px-8 py-3.5 bg-stone-900 dark:bg-amber-500 text-white dark:text-stone-900 text-xs font-bold tracking-widest uppercase hover:bg-amber-700 dark:hover:bg-amber-400 transition">
+          <Link href="/shop/earrings" className="inline-block px-8 py-3.5 bg-rose-400 dark:bg-amber-500 text-white dark:text-stone-900 text-xs font-bold tracking-widest uppercase hover:bg-rose-500 dark:hover:bg-amber-400 transition">
             Shop Now
           </Link>
         </div>
@@ -78,12 +78,12 @@ export default function CheckoutView() {
       <div className="min-h-[70vh] flex items-center justify-center px-4 py-16">
         <div className="max-w-md w-full animate-fade-up">
           {/* Icon */}
-          <div className="w-16 h-16 rounded-full bg-amber-50 dark:bg-amber-500/10 border border-amber-100 dark:border-amber-500/20 flex items-center justify-center mx-auto mb-6">
-            <Lock className="w-7 h-7 text-amber-600 dark:text-amber-400" />
+          <div className="w-16 h-16 rounded-full bg-rose-50 dark:bg-amber-500/10 border border-rose-100 dark:border-amber-500/20 flex items-center justify-center mx-auto mb-6">
+            <Lock className="w-7 h-7 text-rose-400 dark:text-amber-400" />
           </div>
 
           <div className="text-center mb-8">
-            <p className="text-[11px] uppercase tracking-[0.22em] text-amber-600 dark:text-amber-400 mb-3">Secure Checkout</p>
+            <p className="text-[11px] uppercase tracking-[0.22em] text-rose-400 dark:text-amber-400 mb-3">Secure Checkout</p>
             <h1 className="font-serif text-2xl md:text-3xl text-stone-900 dark:text-stone-100 mb-3">
               Sign in to Continue
             </h1>
@@ -122,14 +122,14 @@ export default function CheckoutView() {
           <div className="space-y-3">
             <Link
               href={`/login?redirect=/checkout`}
-              className="flex items-center justify-center gap-2 w-full py-4 bg-stone-900 dark:bg-amber-500 text-white dark:text-stone-900 text-xs font-bold tracking-[0.18em] uppercase hover:bg-amber-700 dark:hover:bg-amber-400 transition-all duration-300 hover:shadow-lg"
+              className="flex items-center justify-center gap-2 w-full py-4 bg-rose-400 dark:bg-amber-500 text-white dark:text-stone-900 text-xs font-bold tracking-[0.18em] uppercase hover:bg-rose-500 dark:hover:bg-amber-400 transition-all duration-300 hover:shadow-lg"
             >
               Sign In to Checkout
               <ChevronRight className="w-4 h-4" />
             </Link>
             <Link
               href={`/register?redirect=/checkout`}
-              className="flex items-center justify-center gap-2 w-full py-3.5 border border-stone-200 dark:border-white/10 text-stone-700 dark:text-stone-300 text-xs font-medium tracking-[0.18em] uppercase hover:border-amber-500 dark:hover:border-amber-500/50 hover:text-amber-700 dark:hover:text-amber-400 transition"
+              className="flex items-center justify-center gap-2 w-full py-3.5 border border-rose-200 dark:border-white/10 text-stone-700 dark:text-stone-300 text-xs font-medium tracking-[0.18em] uppercase hover:border-rose-400 dark:hover:border-amber-500/50 hover:text-rose-600 dark:hover:text-amber-400 transition"
             >
               Create Account
             </Link>
@@ -159,7 +159,7 @@ export default function CheckoutView() {
 
       {/* Header */}
       <div className="mb-10">
-        <p className="text-[11px] uppercase tracking-[0.22em] text-amber-600 dark:text-amber-400 mb-2">Secure Checkout</p>
+        <p className="text-[11px] uppercase tracking-[0.22em] text-rose-400 dark:text-amber-400 mb-2">Secure Checkout</p>
         <h1 className="font-serif text-3xl md:text-4xl text-stone-900 dark:text-stone-100">Complete Your Order</h1>
       </div>
 
@@ -200,7 +200,7 @@ export default function CheckoutView() {
           {/* Delivery */}
           <div>
             <h2 className="font-serif text-lg text-stone-900 dark:text-stone-100 mb-5 flex items-center gap-2">
-              <Truck className="w-4 h-4 text-amber-500" /> Delivery Details
+              <Truck className="w-4 h-4 text-rose-400 dark:text-amber-500" /> Delivery Details
             </h2>
             <div className="space-y-4">
               {[
@@ -222,7 +222,7 @@ export default function CheckoutView() {
           {/* Payment */}
           <div>
             <h2 className="font-serif text-lg text-stone-900 dark:text-stone-100 mb-5 flex items-center gap-2">
-              <Shield className="w-4 h-4 text-amber-500" /> Payment
+              <Shield className="w-4 h-4 text-rose-400 dark:text-amber-500" /> Payment
             </h2>
             <div className="space-y-4">
               <div>

@@ -13,7 +13,7 @@ export default function CartView() {
       <div className="max-w-2xl mx-auto px-4 py-24 text-center">
         <h1 className="font-serif text-3xl text-stone-900 dark:text-stone-100 mb-4">Your Bag is Empty</h1>
         <p className="text-stone-500 dark:text-stone-400 text-sm mb-8">Looks like you haven&apos;t added anything yet.</p>
-        <Link href="/shop/earrings" className="inline-block px-8 py-3 bg-stone-900 dark:bg-amber-500 text-white dark:text-stone-900 text-sm tracking-widest uppercase hover:bg-stone-700 dark:hover:bg-amber-400 transition">
+        <Link href="/shop/earrings" className="inline-block px-8 py-3 bg-rose-400 dark:bg-amber-500 text-white dark:text-stone-900 text-sm tracking-widest uppercase hover:bg-rose-500 dark:hover:bg-amber-400 transition">
           Continue Shopping
         </Link>
       </div>
@@ -54,16 +54,16 @@ export default function CartView() {
           ))}
         </div>
         <div className="lg:col-span-1">
-          <div className="bg-stone-50 dark:bg-stone-800/50 p-5 md:p-6 lg:sticky lg:top-24">
+          <div className="bg-rose-50/60 dark:bg-stone-800/50 p-5 md:p-6 lg:sticky lg:top-24">
             <h2 className="font-serif text-xl text-stone-900 dark:text-stone-100 mb-6">Order Summary</h2>
             <div className="space-y-3 mb-6 text-sm">
               <div className="flex justify-between text-stone-600 dark:text-stone-400"><span>Subtotal</span><span>£{total.toFixed(2)}</span></div>
               <div className="flex justify-between text-stone-600 dark:text-stone-400"><span>Delivery</span><span>{total >= 75 ? 'Free' : '£4.99'}</span></div>
-              {total < 75 && <p className="text-xs text-amber-600 dark:text-amber-400">Add £{(75 - total).toFixed(2)} more for free delivery</p>}
-              <div className="border-t border-stone-200 dark:border-stone-700 pt-3 flex justify-between font-semibold text-stone-900 dark:text-stone-100"><span>Total</span><span>£{(total + (total >= 75 ? 0 : 4.99)).toFixed(2)}</span></div>
+              {total < 75 && <p className="text-xs text-rose-400 dark:text-amber-400">Add £{(75 - total).toFixed(2)} more for free delivery</p>}
+              <div className="border-t border-rose-100 dark:border-stone-700 pt-3 flex justify-between font-semibold text-stone-900 dark:text-stone-100"><span>Total</span><span>£{(total + (total >= 75 ? 0 : 4.99)).toFixed(2)}</span></div>
             </div>
-            <Link href="/checkout" className="block w-full text-center py-4 bg-stone-900 dark:bg-amber-500 text-white dark:text-stone-900 text-sm tracking-widest uppercase hover:bg-stone-700 dark:hover:bg-amber-400 transition">Checkout</Link>
-            <Link href="/shop/earrings" className="block w-full text-center py-3 mt-3 text-xs text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 transition">Continue Shopping</Link>
+            <Link href="/checkout" className="block w-full text-center py-4 bg-rose-400 dark:bg-amber-500 text-white dark:text-stone-900 text-sm tracking-widest uppercase hover:bg-rose-500 dark:hover:bg-amber-400 transition">Checkout</Link>
+            <Link href="/shop/earrings" className="block w-full text-center py-3 mt-3 text-xs text-stone-500 dark:text-stone-400 hover:text-rose-500 dark:hover:text-stone-200 transition">Continue Shopping</Link>
           </div>
         </div>
       </div>

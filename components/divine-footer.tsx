@@ -45,7 +45,7 @@ export default function DivineFooter() {
   ]
 
   return (
-    <footer className="bg-[#0d0e10] dark:bg-[#080a12] border-t border-white/[0.06]">
+    <footer className="bg-[#0d0e10] dark:bg-[#080a12] border-t border-rose-900/20 dark:border-white/[0.06]">
 
       {/* Main footer grid */}
       <div className="max-w-7xl mx-auto px-6 md:px-8 pt-16 pb-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12">
@@ -56,7 +56,7 @@ export default function DivineFooter() {
             <ThemeLogo size={34} forceDark />
             <div>
               <p className="font-serif text-base font-bold text-white tracking-wide">Divine Couture</p>
-              <p className="text-[10px] tracking-[0.2em] text-white/35 uppercase">Indian Jewellery · UK</p>
+              <p className="text-[10px] tracking-[0.2em] text-rose-400/40 dark:text-white/35 uppercase">Indian Jewellery · UK</p>
             </div>
           </div>
           <p className="text-sm text-white/45 leading-relaxed mb-6 max-w-xs">
@@ -69,14 +69,14 @@ export default function DivineFooter() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
-              className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:text-amber-400 hover:border-amber-400/40 transition duration-200"
+              className="w-9 h-9 rounded-full border border-rose-800/40 dark:border-white/10 flex items-center justify-center text-white/50 hover:text-rose-300 dark:hover:text-amber-400 hover:border-rose-400/40 dark:hover:border-amber-400/40 transition duration-200"
             >
               <InstagramIcon className="w-4 h-4" />
             </a>
             <a
               href="#"
               aria-label="TikTok"
-              className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:text-amber-400 hover:border-amber-400/40 transition duration-200"
+              className="w-9 h-9 rounded-full border border-rose-800/40 dark:border-white/10 flex items-center justify-center text-white/50 hover:text-rose-300 dark:hover:text-amber-400 hover:border-rose-400/40 dark:hover:border-amber-400/40 transition duration-200"
             >
               <TikTokIcon className="w-4 h-4" />
             </a>
@@ -85,11 +85,11 @@ export default function DivineFooter() {
 
         {/* Shop links */}
         <div>
-          <p className="text-[10px] uppercase tracking-[0.22em] text-amber-500/80 mb-5 font-semibold">Shop</p>
+          <p className="text-[10px] uppercase tracking-[0.22em] text-rose-400/90 dark:text-amber-500/80 mb-5 font-semibold">Shop</p>
           <ul className="space-y-3">
             {shopLinks.map((l) => (
               <li key={l.label}>
-                <Link href={l.href} className="text-sm text-white/45 hover:text-amber-400 transition duration-200">
+                <Link href={l.href} className="text-sm text-white/45 hover:text-rose-300 dark:hover:text-amber-400 transition duration-200">
                   {l.label}
                 </Link>
               </li>
@@ -99,11 +99,11 @@ export default function DivineFooter() {
 
         {/* Account links */}
         <div>
-          <p className="text-[10px] uppercase tracking-[0.22em] text-amber-500/80 mb-5 font-semibold">Account</p>
+          <p className="text-[10px] uppercase tracking-[0.22em] text-rose-400/90 dark:text-amber-500/80 mb-5 font-semibold">Account</p>
           <ul className="space-y-3">
             {accountLinks.map((l) => (
               <li key={l.label}>
-                <Link href={l.href} className="text-sm text-white/45 hover:text-amber-400 transition duration-200">
+                <Link href={l.href} className="text-sm text-white/45 hover:text-rose-300 dark:hover:text-amber-400 transition duration-200">
                   {l.label}
                 </Link>
               </li>
@@ -113,7 +113,7 @@ export default function DivineFooter() {
 
         {/* Newsletter */}
         <div>
-          <p className="text-[10px] uppercase tracking-[0.22em] text-amber-500/80 mb-5 font-semibold">Stay Connected</p>
+          <p className="text-[10px] uppercase tracking-[0.22em] text-rose-400/90 dark:text-amber-500/80 mb-5 font-semibold">Stay Connected</p>
           <p className="text-sm text-white/45 leading-relaxed mb-4">
             New arrivals, exclusive offers and bridal edits — straight to your inbox.
           </p>
@@ -134,7 +134,7 @@ export default function DivineFooter() {
               />
               <button
                 type="submit"
-                className="px-4 py-2.5 bg-rose-400 text-white text-xs font-bold tracking-wider uppercase hover:bg-rose-500 transition rounded-sm shrink-0"
+                className="px-4 py-2.5 bg-rose-400 dark:bg-amber-500 text-white dark:text-stone-900 text-xs font-bold tracking-wider uppercase hover:bg-rose-500 dark:hover:bg-amber-400 transition rounded-sm shrink-0"
               >
                 Join
               </button>
@@ -143,9 +143,9 @@ export default function DivineFooter() {
         </div>
       </div>
 
-      {/* Gold divider */}
+      {/* Divider */}
       <div className="max-w-7xl mx-auto px-6 md:px-8">
-        <div className="h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" />
+        <div className="h-px bg-gradient-to-r from-transparent via-rose-500/20 dark:via-amber-500/20 to-transparent" />
       </div>
 
       {/* Bottom bar */}

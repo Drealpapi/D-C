@@ -72,10 +72,10 @@ export default function AuthForm({ mode }: { mode: AuthMode }) {
     return (
       <AuthShell mode={mode}>
         <div className="text-center py-8 animate-scale-in">
-          <CheckCircle2 className="w-14 h-14 text-amber-500 mx-auto mb-5" />
+          <CheckCircle2 className="w-14 h-14 text-rose-400 dark:text-amber-500 mx-auto mb-5" />
           <h2 className="font-serif text-2xl text-stone-900 dark:text-stone-100 mb-2">Welcome to Divine Couture</h2>
           <p className="text-stone-500 dark:text-stone-400 text-sm mb-8">Your account has been created. Sign in to continue.</p>
-          <Link href="/login" className="inline-flex items-center gap-2 px-8 py-3.5 bg-amber-500 text-stone-900 text-xs font-bold tracking-[0.18em] uppercase hover:bg-amber-400 transition">
+          <Link href="/login" className="inline-flex items-center gap-2 px-8 py-3.5 bg-rose-400 dark:bg-amber-500 text-white dark:text-stone-900 text-xs font-bold tracking-[0.18em] uppercase hover:bg-rose-500 dark:hover:bg-amber-400 transition">
             Sign In Now →
           </Link>
         </div>
@@ -87,14 +87,14 @@ export default function AuthForm({ mode }: { mode: AuthMode }) {
     return (
       <AuthShell mode={mode}>
         <div className="text-center py-8 animate-scale-in">
-          <div className="w-14 h-14 rounded-full bg-amber-50 dark:bg-amber-500/10 flex items-center justify-center mx-auto mb-5">
+          <div className="w-14 h-14 rounded-full bg-rose-50 dark:bg-amber-500/10 flex items-center justify-center mx-auto mb-5">
             <span className="text-2xl">✉</span>
           </div>
           <h2 className="font-serif text-2xl text-stone-900 dark:text-stone-100 mb-2">Check Your Email</h2>
           <p className="text-stone-500 dark:text-stone-400 text-sm mb-8">
             If an account exists for <span className="text-stone-700 dark:text-stone-300 font-medium">{form.email}</span>, we've sent a reset link.
           </p>
-          <Link href="/login" className="text-sm text-amber-600 dark:text-amber-400 hover:underline underline-offset-4 transition">
+          <Link href="/login" className="text-sm text-rose-400 dark:text-amber-400 hover:underline underline-offset-4 transition">
             ← Back to Sign In
           </Link>
         </div>
@@ -144,7 +144,7 @@ export default function AuthForm({ mode }: { mode: AuthMode }) {
                   type={showPassword ? 'text' : 'password'}
                   required value={form.password} onChange={handleChange}
                   placeholder="••••••••"
-                  className="w-full border border-stone-200 dark:border-white/10 bg-stone-50 dark:bg-white/[0.04] px-4 py-3.5 pr-12 text-sm text-stone-800 dark:text-stone-200 placeholder:text-stone-300 dark:placeholder:text-white/20 focus:outline-none focus:border-amber-500 dark:focus:border-amber-500/70 transition rounded-sm"
+          className="w-full border border-rose-100 dark:border-white/10 bg-rose-50/40 dark:bg-white/[0.04] px-4 py-3.5 pr-12 text-sm text-stone-800 dark:text-stone-200 placeholder:text-stone-300 dark:placeholder:text-white/20 focus:outline-none focus:border-rose-400 dark:focus:border-amber-500/70 transition rounded-sm"
                 />
                 <button type="button" onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 transition"
@@ -162,7 +162,7 @@ export default function AuthForm({ mode }: { mode: AuthMode }) {
           )}
 
           <button type="submit" disabled={loading}
-            className="w-full py-4 bg-stone-900 dark:bg-amber-500 text-white dark:text-stone-900 text-xs font-bold tracking-[0.2em] uppercase hover:bg-amber-700 dark:hover:bg-amber-400 transition-all duration-300 disabled:opacity-60 hover:shadow-[0_8px_24px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_8px_24px_rgba(212,175,55,0.2)] flex items-center justify-center gap-2"
+            className="w-full py-4 bg-rose-400 dark:bg-amber-500 text-white dark:text-stone-900 text-xs font-bold tracking-[0.2em] uppercase hover:bg-rose-500 dark:hover:bg-amber-400 transition-all duration-300 disabled:opacity-60 hover:shadow-[0_8px_24px_rgba(244,114,182,0.2)] dark:hover:shadow-[0_8px_24px_rgba(212,175,55,0.2)] flex items-center justify-center gap-2"
           >
             {loading
               ? <span className="inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
@@ -173,8 +173,8 @@ export default function AuthForm({ mode }: { mode: AuthMode }) {
 
         {/* Demo hint for login */}
         {mode === 'login' && (
-          <div className="mt-5 px-4 py-3 bg-amber-50 dark:bg-amber-500/[0.07] border border-amber-100 dark:border-amber-500/20 rounded-sm">
-            <p className="text-[11px] text-amber-700 dark:text-amber-400 font-semibold mb-1 uppercase tracking-wider">Demo Account</p>
+          <div className="mt-5 px-4 py-3 bg-rose-50/80 dark:bg-amber-500/[0.07] border border-rose-100 dark:border-amber-500/20 rounded-sm">
+            <p className="text-[11px] text-rose-400 dark:text-amber-400 font-semibold mb-1 uppercase tracking-wider">Demo Account</p>
             <p className="text-[11px] text-stone-600 dark:text-stone-400 font-mono">precious@divinecouture.co.uk</p>
             <p className="text-[11px] text-stone-600 dark:text-stone-400 font-mono">divine123</p>
           </div>
@@ -183,14 +183,14 @@ export default function AuthForm({ mode }: { mode: AuthMode }) {
         <div className="mt-7 text-center text-sm text-stone-400 dark:text-stone-500">
           {mode === 'login' ? (
             <>Don't have an account?{' '}
-              <Link href="/register" className="text-stone-700 dark:text-amber-400 hover:underline underline-offset-4 transition font-medium">Register</Link>
+              <Link href="/register" className="text-rose-500 dark:text-amber-400 hover:underline underline-offset-4 transition font-medium">Register</Link>
             </>
           ) : mode === 'register' ? (
             <>Already have an account?{' '}
-              <Link href="/login" className="text-stone-700 dark:text-amber-400 hover:underline underline-offset-4 transition font-medium">Sign In</Link>
+              <Link href="/login" className="text-rose-500 dark:text-amber-400 hover:underline underline-offset-4 transition font-medium">Sign In</Link>
             </>
           ) : (
-            <Link href="/login" className="text-stone-700 dark:text-amber-400 hover:underline underline-offset-4 transition font-medium">← Back to Sign In</Link>
+            <Link href="/login" className="text-rose-500 dark:text-amber-400 hover:underline underline-offset-4 transition font-medium">← Back to Sign In</Link>
           )}
         </div>
       </div>
@@ -208,7 +208,7 @@ function Field({ label, id, ...props }: { label: string; id: string } & React.In
       <input
         id={id}
         {...props}
-        className="w-full border border-stone-200 dark:border-white/10 bg-stone-50 dark:bg-white/[0.04] px-4 py-3.5 text-sm text-stone-800 dark:text-stone-200 placeholder:text-stone-300 dark:placeholder:text-white/20 focus:outline-none focus:border-amber-500 dark:focus:border-amber-500/70 transition rounded-sm"
+        className="w-full border border-rose-100 dark:border-white/10 bg-rose-50/40 dark:bg-white/[0.04] px-4 py-3.5 text-sm text-stone-800 dark:text-stone-200 placeholder:text-stone-300 dark:placeholder:text-white/20 focus:outline-none focus:border-rose-400 dark:focus:border-amber-500/70 transition rounded-sm"
       />
     </div>
   )
@@ -254,7 +254,7 @@ function AuthShell({ mode, children }: { mode: AuthMode; children: React.ReactNo
       </div>
 
       {/* Right panel — form */}
-      <div className="flex-1 flex flex-col bg-[#faf8f5] dark:bg-[#0d0f1a]">
+      <div className="flex-1 flex flex-col bg-[#fdf6f7] dark:bg-[#0d0f1a]">
         {/* Mobile header */}
         <div className="lg:hidden flex items-center justify-between px-6 py-5 border-b border-stone-100 dark:border-white/[0.05]">
           <Link href="/" className="flex items-center gap-2.5">
@@ -270,7 +270,7 @@ function AuthShell({ mode, children }: { mode: AuthMode; children: React.ReactNo
         <div className="flex-1 flex items-center justify-center px-6 py-12 md:px-12">
           <div className="w-full max-w-md">
             {/* Back link — desktop */}
-            <Link href="/" className="hidden lg:inline-flex items-center gap-1.5 text-xs text-stone-400 dark:text-stone-500 hover:text-amber-600 dark:hover:text-amber-400 transition mb-10 group">
+            <Link href="/" className="hidden lg:inline-flex items-center gap-1.5 text-xs text-rose-300 dark:text-stone-500 hover:text-rose-500 dark:hover:text-amber-400 transition mb-10 group">
               <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5" />
               Back to store
             </Link>
