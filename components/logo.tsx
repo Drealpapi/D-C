@@ -7,32 +7,37 @@ import { useEffect, useState } from 'react'
 interface ThemeLogoProps {
   size?: number
   className?: string
-  /** Always invert — for permanently dark backgrounds (footer, sidebar) */
+  /** Force dark version — for permanently dark backgrounds (footer, admin sidebar) */
   forceDark?: boolean
 }
 
-export default function ThemeLogo({ size = 40, className = '', forceDark = false }: ThemeLogoProps) {
+export default function ThemeLogo({ size = 48, className = '', forceDark = false }: ThemeLogoProps) {
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => setMounted(true), [])
 
-  const invert = forceDark || (mounted && resolvedTheme === 'dark')
+  const isDark = forceDark || (mounted && resolvedTheme === 'dark')
 
+  // Light mode: tightly-cropped transparent pale-pink monogram
+  // Dark mode:  tightly-cropped transparent white monogram — no filters, no blending tricks
   return (
     <img
-      src="/images/divine-couture-logo.png"
+      src={isDark
+        ? '/images/divine-couture-logo-dark-transparent.png'
+        : '/images/divine-couture-logo-transparent.png'
+      }
       alt="Divine Couture"
+      width={size}
+      height={size}
       style={{
         width: size,
         height: size,
         objectFit: 'contain',
         display: 'block',
         flexShrink: 0,
-        filter: invert ? 'invert(1)' : 'none',
-        transition: 'filter 0.2s ease',
-        // hide until mounted to avoid flash of wrong theme
         opacity: mounted || forceDark ? 1 : 0,
+        transition: 'opacity 0.2s ease',
       }}
       className={className}
     />

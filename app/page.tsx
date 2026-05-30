@@ -10,12 +10,12 @@ import { useReveal } from '@/hooks/use-reveal'
 import { useProducts } from '@/lib/use-products'
 
 const categories = [
-  { name: 'Earrings',    image: '/images/jewelry-earrings-1.jpg', href: '/shop/earrings',    description: 'Jhumkas, chandbalis & more',      featured: true },
-  { name: 'Bangles',     image: '/images/jewelry-bangles-1.jpg',  href: '/shop/bangles',     description: 'Polki, Kundan & glass sets',       featured: false },
-  { name: 'Accessories', image: '/images/accessory-scarf-1.jpg',  href: '/shop/accessories', description: 'Dupattas, tikkas & more',          featured: false },
-  { name: 'Jewelry',     image: '/images/jewelry-necklace-1.jpg', href: '/shop/jewelry',     description: 'Necklaces, bracelets & more',      featured: true },
-  { name: 'Sarees',      image: '/images/collection-sarees.jpg',  href: '/shop/sarees',      description: 'Silk, cotton & embroidered',       featured: false },
-  { name: 'Lehengas',    image: '/images/collection-lehengas.jpg',href: '/shop/lehengas',    description: 'Bridal & festive collections',     featured: false },
+  { name: 'Earrings',    image: '/images/jewelry-earrings-1.jpg',  href: '/shop/earrings',    description: 'Jhumkas, chandbalis & more',   comingSoon: false },
+  { name: 'Bangles',     image: '/images/jewelry-bangles-1.jpg',   href: '/shop/bangles',     description: 'Polki, Kundan & glass sets',   comingSoon: false },
+  { name: 'Accessories', image: '/images/accessory-scarf-1.jpg',   href: '/shop/accessories', description: 'Dupattas, tikkas & more',      comingSoon: false },
+  { name: 'Jewelry',     image: '/images/jewelry-necklace-1.jpg',  href: '/shop/jewelry',     description: 'Necklaces, bracelets & more',  comingSoon: false },
+  { name: 'Sarees',      image: '/images/collection-sarees.jpg',   href: '#',                 description: 'Silk, cotton & embroidered',   comingSoon: true  },
+  { name: 'Lehengas',    image: '/images/collection-lehengas.jpg', href: '#',                 description: 'Bridal & festive collections', comingSoon: true  },
 ]
 
 const features = [
@@ -28,42 +28,62 @@ const features = [
 function CategoryCard({ cat, tall = false, delay = 0 }: {
   cat: typeof categories[0]; tall?: boolean; delay?: number
 }) {
-  return (
-    <Link
-      href={cat.href}
-      className="group block reveal"
-      style={{ transitionDelay: `${delay}ms` }}
-    >
-      <div className={`relative overflow-hidden bg-stone-100 dark:bg-stone-900 ${tall ? 'aspect-[3/4]' : 'aspect-[4/3]'}`}>
-        <Image
-          src={cat.image} alt={cat.name} fill
-          className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.06]"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-        />
-        {/* Always-strong base gradient so text is always readable */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
-        {/* Hover: blush pink glow rises from bottom */}
-        <div className="absolute inset-0 bg-gradient-to-t from-rose-900/55 via-rose-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        {/* Rose inset border glow */}
-        <div className="absolute inset-0 ring-0 ring-inset ring-rose-300/0 group-hover:ring-2 group-hover:ring-inset group-hover:ring-rose-300/60 dark:group-hover:ring-amber-400/40 transition-all duration-500" />
+  const inner = (
+    <div className={`relative overflow-hidden bg-stone-100 dark:bg-stone-900 ${tall ? 'aspect-[3/4]' : 'aspect-[4/3]'}`}>
+      <Image
+        src={cat.image} alt={cat.name} fill
+        className={`object-cover object-center transition-transform duration-700 ease-out ${cat.comingSoon ? 'scale-105 blur-[2px] brightness-50' : 'group-hover:scale-[1.06]'}`}
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      />
 
-        {/* Content */}
-        <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-          <h3
-            className={`font-serif text-white font-semibold mb-1 transition-all duration-300 group-hover:text-rose-100 dark:group-hover:text-amber-200 ${tall ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'}`}
-            style={{ textShadow: '0 2px 16px rgba(0,0,0,0.7)' }}
-          >
+      {cat.comingSoon ? (
+        /* Coming Soon overlay */
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40">
+          <span className="text-[10px] uppercase tracking-[0.3em] text-rose-300/90 mb-2 font-medium">Coming Soon</span>
+          <h3 className="font-serif text-white text-xl md:text-2xl font-semibold mb-1" style={{ textShadow: '0 2px 16px rgba(0,0,0,0.7)' }}>
             {cat.name}
           </h3>
-          <p className="text-white/80 text-xs tracking-wide drop-shadow">{cat.description}</p>
-          {/* Shop now pill — slides up on hover */}
-          <div className="flex items-center gap-2 mt-3 opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-300">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-rose-400/90 dark:bg-amber-500/90 text-white dark:text-stone-900 text-[10px] tracking-[0.18em] uppercase font-bold rounded-full shadow-lg">
-              Shop now →
-            </span>
+          <p className="text-white/50 text-[11px] tracking-wide">{cat.description}</p>
+          <div className="mt-4 px-4 py-1.5 rounded-full border border-rose-300/40 text-rose-300/80 text-[10px] tracking-[0.2em] uppercase">
+            Stay tuned
           </div>
         </div>
+      ) : (
+        /* Live category overlay */
+        <>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-rose-900/55 via-rose-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="absolute inset-0 ring-0 ring-inset ring-rose-300/0 group-hover:ring-2 group-hover:ring-inset group-hover:ring-rose-300/60 dark:group-hover:ring-amber-400/40 transition-all duration-500" />
+          <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
+            <h3
+              className={`font-serif text-white font-semibold mb-1 transition-all duration-300 group-hover:text-rose-100 dark:group-hover:text-amber-200 ${tall ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'}`}
+              style={{ textShadow: '0 2px 16px rgba(0,0,0,0.7)' }}
+            >
+              {cat.name}
+            </h3>
+            <p className="text-white/80 text-xs tracking-wide drop-shadow">{cat.description}</p>
+            <div className="flex items-center gap-2 mt-3 opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-300">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-rose-400/90 dark:bg-amber-500/90 text-white dark:text-stone-900 text-[10px] tracking-[0.18em] uppercase font-bold rounded-full shadow-lg">
+                Shop now →
+              </span>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  )
+
+  if (cat.comingSoon) {
+    return (
+      <div className="reveal cursor-default" style={{ transitionDelay: `${delay}ms` }}>
+        {inner}
       </div>
+    )
+  }
+
+  return (
+    <Link href={cat.href} className="group block reveal" style={{ transitionDelay: `${delay}ms` }}>
+      {inner}
     </Link>
   )
 }
@@ -113,7 +133,7 @@ export default function Home() {
                 <h2 className="font-serif text-3xl md:text-4xl text-stone-900 dark:text-stone-100 mb-3">Our Collections</h2>
                 <div className="gold-divider" style={{ margin: 0 }} />
               </div>
-              <Link href="/shop/collections" className="reveal reveal-right text-xs tracking-widest uppercase text-stone-400 dark:text-stone-500 hover:text-rose-500 dark:hover:text-amber-400 transition hidden sm:flex items-center gap-2 group">
+              <Link href="/shop/jewelry" className="reveal reveal-right text-xs tracking-widest uppercase text-stone-400 dark:text-stone-500 hover:text-rose-500 dark:hover:text-amber-400 transition hidden sm:flex items-center gap-2 group">
                 All collections <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
               </Link>
             </div>
@@ -251,10 +271,10 @@ export default function Home() {
                     <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
                   </Link>
                   <Link
-                    href="/shop/collections"
+                    href="/shop/jewelry"
                     className="inline-flex items-center gap-2 px-7 py-3.5 border border-rose-200 dark:border-white/20 text-stone-700 dark:text-stone-300 text-xs font-medium tracking-[0.18em] uppercase hover:border-rose-400 dark:hover:border-white/40 hover:text-rose-600 dark:hover:text-white transition-all duration-300"
                   >
-                    Our Collections
+                    All Jewellery
                   </Link>
                 </div>
 

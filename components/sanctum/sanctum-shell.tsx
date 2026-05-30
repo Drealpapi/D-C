@@ -34,7 +34,7 @@ const VIEW_LABELS: Record<AdminView, string> = {
 // Admin uses its own independent theme state — doesn't affect the storefront
 type AdminTheme = 'dark' | 'dim' | 'light'
 function useAdminTheme() {
-  const [theme, setTheme] = useState<AdminTheme>('dark')
+  const [theme, setTheme] = useState<AdminTheme>('light')
   const cycle = () => setTheme((t) => t === 'dark' ? 'dim' : t === 'dim' ? 'light' : 'dark')
   return { theme, cycle }
 }
@@ -46,33 +46,33 @@ const THEME_TOKENS: Record<AdminTheme, {
 }> = {
   dark: {
     bg:        'bg-[#0d0e12]',
-    bgSide:    'bg-[#0a0b0f]',
-    topBar:    'bg-[#0d0e12]/90',
-    mobileNav: 'bg-[#0a0b0f]',
-    border:    'border-white/[0.05]',
+    bgSide:    'bg-[#0a0b0f]/80',
+    topBar:    'bg-[#0d0e12]/70 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_1px_0_rgba(255,255,255,0.04)]',
+    mobileNav: 'bg-[#0a0b0f]/90 backdrop-blur-xl',
+    border:    'border-white/[0.06]',
     text:      'text-white/80',
     subtext:   'text-white/30',
-    cardBg:    'bg-[#13141a]',
+    cardBg:    'bg-white/[0.04] backdrop-blur-sm',
   },
   dim: {
     bg:        'bg-[#161820]',
-    bgSide:    'bg-[#12131a]',
-    topBar:    'bg-[#161820]/90',
-    mobileNav: 'bg-[#12131a]',
-    border:    'border-white/[0.05]',
+    bgSide:    'bg-[#12131a]/80',
+    topBar:    'bg-[#161820]/70 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_1px_0_rgba(255,255,255,0.03)]',
+    mobileNav: 'bg-[#12131a]/90 backdrop-blur-xl',
+    border:    'border-white/[0.06]',
     text:      'text-white/80',
     subtext:   'text-white/30',
-    cardBg:    'bg-[#1c1d26]',
+    cardBg:    'bg-white/[0.04] backdrop-blur-sm',
   },
   light: {
-    bg:        'bg-stone-100',
-    bgSide:    'bg-white',
-    topBar:    'bg-stone-100/95',
-    mobileNav: 'bg-white',
-    border:    'border-stone-300',
-    text:      'text-stone-900',
-    subtext:   'text-stone-500',
-    cardBg:    'bg-white',
+    bg:        'bg-[#fdf4f5]',
+    bgSide:    'bg-[#fef0f2]/80',
+    topBar:    'bg-[#fdf4f5]/70 backdrop-blur-xl border-b border-rose-200/60 shadow-[0_1px_0_rgba(225,100,120,0.06)]',
+    mobileNav: 'bg-[#fef0f2]/90 backdrop-blur-xl',
+    border:    'border-rose-200/60',
+    text:      'text-rose-950',
+    subtext:   'text-rose-400',
+    cardBg:    'bg-white/70 backdrop-blur-sm',
   },
 }
 
@@ -95,9 +95,9 @@ export default function SanctumShell() {
       {/* Main */}
       <main className="flex-1 min-w-0 overflow-auto pb-20 md:pb-0">
         {/* Top bar */}
-        <div className={`sticky top-0 z-30 ${tk.topBar} backdrop-blur border-b ${tk.border} px-6 py-4 flex items-center justify-between`}>
+        <div className={`sticky top-0 z-30 ${tk.topBar} px-6 py-4 flex items-center justify-between`}>
           <div>
-            <p className="text-[10px] uppercase tracking-[0.2em] text-amber-500/70 mb-0.5">Divine Couture</p>
+            <p className={`text-[10px] uppercase tracking-[0.2em] mb-0.5 ${isLight ? 'text-rose-400' : 'text-amber-500/70'}`}>Divine Couture</p>
             <h2 className={`text-sm font-semibold ${tk.text}`}>{VIEW_LABELS[view]}</h2>
           </div>
           <div className="flex items-center gap-2">
@@ -113,13 +113,13 @@ export default function SanctumShell() {
               title={theme === 'dark' ? 'Switch to Dim' : theme === 'dim' ? 'Switch to Light' : 'Switch to Dark'}
               className={`p-1.5 rounded-lg transition ${
                 isLight
-                  ? 'text-stone-400 hover:text-stone-700 hover:bg-stone-100'
+                  ? 'text-rose-300 hover:text-rose-600 hover:bg-rose-100/60'
                   : 'text-white/30 hover:text-white/70 hover:bg-white/[0.06]'
               }`}
             >
               {theme === 'dark'  && <Moon       className="w-4 h-4" />}
               {theme === 'dim'   && <SunMedium  className="w-4 h-4" />}
-              {theme === 'light' && <Sun        className="w-4 h-4 text-amber-500" />}
+              {theme === 'light' && <Sun        className="w-4 h-4 text-rose-400" />}
             </button>
 
             {/* Settings shortcut */}
@@ -127,9 +127,9 @@ export default function SanctumShell() {
               onClick={() => setView('settings')}
               className={`p-1.5 rounded-lg transition ${
                 view === 'settings'
-                  ? 'text-amber-500 bg-amber-500/10'
+                  ? isLight ? 'text-rose-600 bg-rose-100' : 'text-amber-500 bg-amber-500/10'
                   : isLight
-                    ? 'text-stone-400 hover:text-stone-700 hover:bg-stone-100'
+                    ? 'text-rose-300 hover:text-rose-600 hover:bg-rose-100/60'
                     : 'text-white/25 hover:text-white/60 hover:bg-white/[0.05]'
               }`}
               title="Settings"
@@ -157,8 +157,8 @@ export default function SanctumShell() {
             onClick={() => setView(id)}
             className={`flex-1 flex flex-col items-center gap-1 py-3 text-xs transition-all duration-200 ${
               view === id
-                ? 'text-amber-500'
-                : isLight ? 'text-stone-400 hover:text-stone-700' : 'text-white/30 hover:text-white/60'
+                ? isLight ? 'text-rose-500' : 'text-amber-500'
+                : isLight ? 'text-rose-300 hover:text-rose-600' : 'text-white/30 hover:text-white/60'
             }`}
           >
             <Icon className="w-5 h-5" />

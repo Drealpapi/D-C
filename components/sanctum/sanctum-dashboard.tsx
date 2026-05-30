@@ -24,22 +24,22 @@ export default function SanctumDashboard({ setView, isLight = false }: { setView
     .reduce((s, o) => s + o.total, 0)
 
   // Light-mode token helpers
-  const card    = isLight ? 'bg-white border-stone-200'         : 'bg-[#13141a] border-white/[0.06]'
-  const cardHov = isLight ? 'hover:border-stone-300 hover:bg-stone-50' : 'hover:border-white/[0.12] hover:bg-[#16171e]'
-  const heading = isLight ? 'text-stone-800'  : 'text-white/90'
-  const muted   = isLight ? 'text-stone-400'  : 'text-white/40'
-  const divider = isLight ? 'divide-stone-100' : 'divide-white/[0.04]'
-  const rowHov  = isLight ? 'hover:bg-stone-50' : 'hover:bg-white/[0.02]'
-  const mono    = isLight ? 'text-amber-600'  : 'text-amber-400/70'
-  const sectionBorder = isLight ? 'border-stone-200' : 'border-white/[0.05]'
-  const viewAll = isLight ? 'text-amber-600 hover:text-amber-700' : 'text-amber-500/70 hover:text-amber-400'
+  const card    = isLight ? 'bg-white border-rose-200/60'         : 'bg-[#13141a] border-white/[0.06]'
+  const cardHov = isLight ? 'hover:border-rose-300 hover:bg-rose-50/40' : 'hover:border-white/[0.12] hover:bg-[#16171e]'
+  const heading = isLight ? 'text-rose-950'  : 'text-white/90'
+  const muted   = isLight ? 'text-rose-400'  : 'text-white/40'
+  const divider = isLight ? 'divide-rose-100/60' : 'divide-white/[0.04]'
+  const rowHov  = isLight ? 'hover:bg-rose-50/40' : 'hover:bg-white/[0.02]'
+  const mono    = isLight ? 'text-rose-500'  : 'text-amber-400/70'
+  const sectionBorder = isLight ? 'border-rose-200/60' : 'border-white/[0.05]'
+  const viewAll = isLight ? 'text-rose-500 hover:text-rose-700' : 'text-amber-500/70 hover:text-amber-400'
 
   const STATUS_COLORS_LIGHT: Record<string, string> = {
-    pending:    'bg-amber-100 text-amber-700',
-    processing: 'bg-sky-100 text-sky-700',
-    shipped:    'bg-violet-100 text-violet-700',
-    delivered:  'bg-emerald-100 text-emerald-700',
-    cancelled:  'bg-rose-100 text-rose-700',
+    pending:    'bg-amber-50 text-amber-600',
+    processing: 'bg-sky-50 text-sky-600',
+    shipped:    'bg-violet-50 text-violet-600',
+    delivered:  'bg-emerald-50 text-emerald-600',
+    cancelled:  'bg-rose-50 text-rose-500',
   }
 
   const stats: {
@@ -74,7 +74,7 @@ export default function SanctumDashboard({ setView, isLight = false }: { setView
 
       {/* Header */}
       <div>
-        <p className="text-[11px] uppercase tracking-[0.22em] text-amber-500/70 mb-1">Welcome back</p>
+        <p className={`text-[11px] uppercase tracking-[0.22em] mb-1 ${isLight ? 'text-rose-400' : 'text-amber-500/70'}`}>Welcome back</p>
         <h1 className={`font-serif text-2xl md:text-3xl ${heading}`}>Dashboard</h1>
       </div>
 
@@ -110,15 +110,15 @@ export default function SanctumDashboard({ setView, isLight = false }: { setView
       {/* Quick actions */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {[
-          { label: 'Add Product',   action: () => setView('products'),  color: isLight ? 'text-amber-600'  : 'text-amber-400',  bg: isLight ? 'hover:bg-amber-50'    : 'hover:bg-amber-500/10' },
-          { label: 'View Orders',   action: () => setView('orders'),    color: isLight ? 'text-sky-600'    : 'text-sky-400',    bg: isLight ? 'hover:bg-sky-50'      : 'hover:bg-sky-500/10' },
-          { label: 'Analytics',     action: () => setView('analytics'), color: isLight ? 'text-violet-600' : 'text-violet-400', bg: isLight ? 'hover:bg-violet-50'   : 'hover:bg-violet-500/10' },
-          { label: 'Settings',      action: () => setView('settings'),  color: muted,                                           bg: isLight ? 'hover:bg-stone-100'   : 'hover:bg-white/[0.05]' },
+          { label: 'Add Product',   action: () => setView('products'),  color: isLight ? 'text-rose-500'    : 'text-amber-400',  bg: isLight ? 'hover:bg-rose-50'     : 'hover:bg-amber-500/10' },
+          { label: 'View Orders',   action: () => setView('orders'),    color: isLight ? 'text-sky-600'     : 'text-sky-400',    bg: isLight ? 'hover:bg-sky-50'      : 'hover:bg-sky-500/10' },
+          { label: 'Analytics',     action: () => setView('analytics'), color: isLight ? 'text-violet-600'  : 'text-violet-400', bg: isLight ? 'hover:bg-violet-50'   : 'hover:bg-violet-500/10' },
+          { label: 'Settings',      action: () => setView('settings'),  color: muted,                                            bg: isLight ? 'hover:bg-rose-100/60' : 'hover:bg-white/[0.05]' },
         ].map(({ label, action, color, bg }) => (
           <button
             key={label}
             onClick={action}
-            className={`flex items-center justify-center gap-2 px-4 py-3 border rounded-xl text-xs font-medium transition-all duration-200 ${color} ${bg} ${card} ${isLight ? 'hover:border-stone-300' : 'hover:border-white/[0.1]'}`}
+            className={`flex items-center justify-center gap-2 px-4 py-3 border rounded-xl text-xs font-medium transition-all duration-200 ${color} ${bg} ${card} ${isLight ? 'hover:border-rose-300' : 'hover:border-white/[0.1]'}`}
           >
             <ArrowUpRight className="w-3.5 h-3.5" />
             {label}
@@ -183,8 +183,8 @@ export default function SanctumDashboard({ setView, isLight = false }: { setView
             {users.slice(0, 5).map((u) => (
               <div key={u.id} className={`px-5 py-3.5 flex items-center justify-between ${rowHov} transition`}>
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center shrink-0">
-                    <span className="text-xs font-bold text-stone-900">{u.name.charAt(0)}</span>
+                  <div className="w-8 h-8 rounded-full bg-rose-300 flex items-center justify-center shrink-0">
+                    <span className="text-xs font-bold text-white">{u.name.charAt(0)}</span>
                   </div>
                   <div>
                     <p className={`text-sm font-medium ${heading}`}>{u.name}</p>
@@ -195,8 +195,8 @@ export default function SanctumDashboard({ setView, isLight = false }: { setView
                   <span className={`text-[11px] ${muted}`}>{u.orders} orders</span>
                   <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${
                     u.status === 'active'
-                      ? isLight ? 'bg-emerald-100 text-emerald-700' : 'bg-emerald-500/10 text-emerald-400'
-                      : isLight ? 'bg-rose-100 text-rose-700'       : 'bg-rose-500/10 text-rose-400'
+                      ? isLight ? 'bg-emerald-50 text-emerald-600' : 'bg-emerald-500/10 text-emerald-400'
+                      : isLight ? 'bg-rose-50 text-rose-500'       : 'bg-rose-500/10 text-rose-400'
                   }`}>
                     {u.status}
                   </span>
@@ -225,7 +225,7 @@ export default function SanctumDashboard({ setView, isLight = false }: { setView
           {products.slice(0, 5).map((p) => (
             <div key={p.id} className={`px-5 py-3.5 flex items-center justify-between ${rowHov} transition`}>
               <div className="flex items-center gap-3 min-w-0">
-                <div className={`w-8 h-8 rounded-lg overflow-hidden shrink-0 relative ${isLight ? 'bg-stone-100' : 'bg-white/[0.05]'}`}>
+                <div className={`w-8 h-8 rounded-lg overflow-hidden shrink-0 relative ${isLight ? 'bg-rose-50' : 'bg-white/[0.05]'}`}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
                 </div>
@@ -235,8 +235,8 @@ export default function SanctumDashboard({ setView, isLight = false }: { setView
                 </div>
               </div>
               <div className="flex items-center gap-2 shrink-0 ml-3">
-                {p.isNew    && <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${isLight ? 'bg-amber-100 text-amber-700' : 'bg-amber-500/10 text-amber-400'}`}>New</span>}
-                {p.isOnSale && <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${isLight ? 'bg-rose-100 text-rose-600'   : 'bg-rose-500/10 text-rose-400'}`}>Sale</span>}
+                {p.isNew    && <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${isLight ? 'bg-rose-50 text-rose-500'   : 'bg-amber-500/10 text-amber-400'}`}>New</span>}
+                {p.isOnSale && <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${isLight ? 'bg-pink-50 text-pink-500'    : 'bg-rose-500/10 text-rose-400'}`}>Sale</span>}
                 <span className={`text-sm font-semibold ${heading}`}>£{p.price}</span>
               </div>
             </div>
@@ -260,7 +260,7 @@ export default function SanctumDashboard({ setView, isLight = false }: { setView
           ].map((item, i) => (
             <div key={i} className="flex items-start gap-3">
               <div className={`w-1.5 h-1.5 rounded-full mt-1.5 shrink-0 ${item.dot}`} />
-              <p className={`text-xs flex-1 ${isLight ? 'text-stone-500' : 'text-white/50'}`}>{item.text}</p>
+              <p className={`text-xs flex-1 ${isLight ? 'text-rose-700/70' : 'text-white/50'}`}>{item.text}</p>
               <span className={`text-[10px] shrink-0 ${muted}`}>{item.time}</span>
             </div>
           ))}
