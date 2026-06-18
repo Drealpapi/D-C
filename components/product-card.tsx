@@ -33,7 +33,7 @@ export default function ProductCard({ product, featured = false }: { product: Pr
   return (
     <Link href={`/product/${product.id}`} className="group block">
       {/* Image container */}
-      <div className={`relative overflow-hidden bg-stone-100 dark:bg-stone-900/60 mb-3.5 ${featured ? 'aspect-[4/3]' : 'aspect-square'}`}>
+      <div className={`relative overflow-hidden bg-rose-50 dark:bg-stone-900/60 mb-3.5 rounded-xl ${featured ? 'aspect-[4/3]' : 'aspect-square'}`}>
         <Image
           src={product.image}
           alt={product.name}

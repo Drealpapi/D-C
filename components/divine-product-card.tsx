@@ -78,7 +78,7 @@ export default function DivineProductCard({
               e.preventDefault()
               setIsWishlisted(!isWishlisted)
             }}
-            className="absolute top-4 right-4 z-10 bg-white rounded-full p-2 hover:bg-background transition duration-300 opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
+            className="absolute top-4 right-4 z-10 bg-rose-50/90 backdrop-blur-sm rounded-full p-2 hover:bg-white transition duration-300 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 shadow-sm"
           >
             <Heart
               className={`w-5 h-5 transition ${
@@ -95,7 +95,7 @@ export default function DivineProductCard({
               e.preventDefault()
               // Handle add to cart
             }}
-            className="absolute bottom-0 left-0 right-0 bg-foreground text-foreground-contrast py-3 flex items-center justify-center gap-2 font-medium opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition duration-300 sm:translate-y-full sm:group-hover:translate-y-0"
+            className="absolute bottom-0 left-0 right-0 bg-rose-400/95 backdrop-blur-sm text-white py-3 flex items-center justify-center gap-2 font-medium text-sm tracking-wide opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition duration-300 sm:translate-y-full sm:group-hover:translate-y-0"
           >
             <ShoppingBag className="w-5 h-5" />
             Add to Bag

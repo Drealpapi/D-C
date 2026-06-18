@@ -63,7 +63,7 @@ export default function ShopLayout({ title, description, products, categoryFilte
                 className={`px-3 py-1.5 text-xs tracking-wider uppercase border transition duration-200 ${
                   activeFilter === f
                     ? 'bg-rose-400 dark:bg-amber-500 text-white dark:text-stone-900 border-rose-400 dark:border-amber-500'
-                    : 'bg-white dark:bg-stone-800 text-stone-600 dark:text-stone-300 border-rose-100 dark:border-stone-700 hover:border-rose-300 dark:hover:border-stone-500 hover:text-rose-600 dark:hover:text-stone-200'
+                    : 'bg-rose-50/80 dark:bg-stone-800 text-rose-700 dark:text-stone-300 border-rose-100 dark:border-stone-700 hover:border-rose-300 dark:hover:border-stone-500 hover:text-rose-600 dark:hover:text-stone-200 backdrop-blur-sm'
                 }`}
               >
                 {f}
@@ -83,7 +83,7 @@ export default function ShopLayout({ title, description, products, categoryFilte
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value)}
-              className="text-xs text-stone-700 dark:text-stone-300 border border-rose-100 dark:border-stone-700 px-3 py-2 bg-white dark:bg-stone-800 focus:outline-none focus:border-rose-300 dark:focus:border-amber-600 rounded-sm"
+              className="text-xs text-rose-700 dark:text-stone-300 border border-rose-100 dark:border-stone-700 px-3 py-2 bg-rose-50/80 dark:bg-stone-800 focus:outline-none focus:border-rose-300 dark:focus:border-amber-600 rounded-xl backdrop-blur-sm"
             >
               {SORT_OPTIONS.map((o) => (
                 <option key={o.value} value={o.value}>{o.label}</option>
@@ -104,7 +104,7 @@ export default function ShopLayout({ title, description, products, categoryFilte
               className={`px-4 py-1.5 text-xs border transition duration-200 ${
                 priceRange === i
                   ? 'bg-rose-400 dark:bg-amber-500 text-white dark:text-stone-900 border-rose-400 dark:border-amber-500'
-                  : 'bg-white dark:bg-stone-800 text-stone-600 dark:text-stone-300 border-rose-100 dark:border-stone-700 hover:border-rose-300 dark:hover:border-stone-500 hover:text-rose-600 dark:hover:text-stone-200'
+                  : 'bg-rose-50/80 dark:bg-stone-800 text-rose-700 dark:text-stone-300 border-rose-100 dark:border-stone-700 hover:border-rose-300 dark:hover:border-stone-500 hover:text-rose-600 dark:hover:text-stone-200 backdrop-blur-sm'
               }`}
             >
               {r.label}

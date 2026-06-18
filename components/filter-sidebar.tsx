@@ -72,51 +72,31 @@ export default function FilterSidebar({
   return (
     <div className="w-full md:w-64 space-y-6">
       {/* Price Filter */}
-      <div className="space-y-4 pb-6 border-b border-border">
-        <h3 className="font-serif text-lg font-bold">Price Range</h3>
+      <div className="space-y-4 pb-6 border-b border-rose-100/60 dark:border-border">
+        <h3 className="font-serif text-base font-bold text-rose-950 dark:text-foreground">Price Range</h3>
         <div className="space-y-4">
           <div>
-            <label className="text-sm font-semibold block mb-2">Min: £{priceRange.min}</label>
-            <input
-              type="range"
-              min="0"
-              max="10000"
-              step="100"
-              value={priceRange.min}
-              onChange={(e) => handlePriceChange(e, 'min')}
-              className="w-full accent-primary"
-            />
+            <label className="text-sm font-medium text-rose-700/70 dark:text-muted-foreground block mb-2">Min: £{priceRange.min}</label>
+            <input type="range" min="0" max="10000" step="100" value={priceRange.min}
+              onChange={(e) => handlePriceChange(e, 'min')} className="w-full accent-rose-400 dark:accent-primary" />
           </div>
           <div>
-            <label className="text-sm font-semibold block mb-2">Max: £{priceRange.max}</label>
-            <input
-              type="range"
-              min="0"
-              max="10000"
-              step="100"
-              value={priceRange.max}
-              onChange={(e) => handlePriceChange(e, 'max')}
-              className="w-full accent-primary"
-            />
+            <label className="text-sm font-medium text-rose-700/70 dark:text-muted-foreground block mb-2">Max: £{priceRange.max}</label>
+            <input type="range" min="0" max="10000" step="100" value={priceRange.max}
+              onChange={(e) => handlePriceChange(e, 'max')} className="w-full accent-rose-400 dark:accent-primary" />
           </div>
         </div>
       </div>
 
       {/* Filter Groups */}
       {filters.map((group) => (
-        <div key={group.title} className="space-y-3 pb-6 border-b border-border last:border-0">
+        <div key={group.title} className="space-y-3 pb-6 border-b border-rose-100/60 dark:border-border last:border-0">
           <button
             onClick={() => toggleGroup(group.title)}
-            className="flex items-center justify-between w-full py-2 font-serif font-bold text-foreground hover:text-primary transition-colors"
+            className="flex items-center justify-between w-full py-2 font-serif font-bold text-rose-950 dark:text-foreground hover:text-rose-500 dark:hover:text-primary transition-colors"
           >
             {group.title}
-            <ChevronDown
-              size={18}
-              className={cn(
-                'transition-transform duration-300',
-                expandedGroups.has(group.title) ? 'rotate-180' : ''
-              )}
-            />
+            <ChevronDown size={18} className={cn('transition-transform duration-300 text-rose-300 dark:text-muted-foreground', expandedGroups.has(group.title) ? 'rotate-180' : '')} />
           </button>
 
           {expandedGroups.has(group.title) && (
@@ -127,13 +107,13 @@ export default function FilterSidebar({
                     type="checkbox"
                     checked={selectedFilters.get(group.title)?.has(option.value) || false}
                     onChange={() => handleFilterChange(group.title, option.value)}
-                    className="w-4 h-4 accent-primary rounded"
+                    className="w-4 h-4 accent-rose-400 dark:accent-primary rounded"
                   />
-                  <span className="text-sm text-foreground group-hover:text-primary transition-colors">
+                  <span className="text-sm text-rose-800/80 dark:text-foreground group-hover:text-rose-500 dark:group-hover:text-primary transition-colors">
                     {option.label}
                   </span>
                   {option.count !== undefined && (
-                    <span className="text-xs text-muted-foreground ml-auto">
+                    <span className="text-xs text-rose-300 dark:text-muted-foreground ml-auto">
                       ({option.count})
                     </span>
                   )}

@@ -74,10 +74,10 @@ export default function CategoryPageLayout({
         )}
 
         {/* Mobile filter drawer */}
-        <div className={`fixed inset-y-0 left-0 z-50 w-72 bg-background shadow-xl transform transition-transform duration-300 md:hidden overflow-y-auto ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-          <div className="flex items-center justify-between px-4 py-4 border-b border-border">
-            <h2 className="font-semibold text-foreground">Filters</h2>
-            <button onClick={() => setSidebarOpen(false)} className="p-1 text-muted-foreground hover:text-foreground transition" aria-label="Close filters">
+        <div className={`fixed inset-y-0 left-0 z-50 w-72 bg-[#fdf0f2]/95 dark:bg-[#0d0f1a]/95 backdrop-blur-xl shadow-xl transform transition-transform duration-300 md:hidden overflow-y-auto ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+          <div className="flex items-center justify-between px-4 py-4 border-b border-rose-100/60 dark:border-border">
+            <h2 className="font-semibold text-rose-950 dark:text-foreground">Filters</h2>
+            <button onClick={() => setSidebarOpen(false)} className="p-1 text-rose-400 hover:text-rose-600 dark:text-muted-foreground dark:hover:text-foreground transition" aria-label="Close filters">
               <X size={20} />
             </button>
           </div>
@@ -96,34 +96,34 @@ export default function CategoryPageLayout({
           {/* Products area */}
           <div className="flex-1 min-w-0 space-y-5">
             {/* Toolbar */}
-            <div className="flex items-center justify-between py-3 border-b border-border gap-3">
+            <div className="flex items-center justify-between py-3 border-b border-rose-100/60 dark:border-border gap-3">
               <div className="flex items-center gap-3">
                 {/* Mobile filter button */}
                 <button
                   onClick={() => setSidebarOpen(true)}
-                  className="md:hidden flex items-center gap-2 px-3 py-2 border border-border rounded-lg text-sm font-medium text-foreground hover:border-primary transition"
+                  className="md:hidden flex items-center gap-2 px-3 py-2 border border-rose-100 dark:border-border rounded-xl text-sm font-medium text-rose-700 dark:text-foreground hover:border-rose-300 dark:hover:border-primary bg-rose-50/60 dark:bg-transparent backdrop-blur-sm transition"
                 >
                   <SlidersHorizontal size={16} />
                   Filters
                 </button>
-                <p className="text-sm text-muted-foreground">
-                  <span className="font-semibold text-foreground">{sortedProducts.length}</span> products
+                <p className="text-sm text-rose-400/80 dark:text-muted-foreground">
+                  <span className="font-semibold text-rose-900 dark:text-foreground">{sortedProducts.length}</span> products
                 </p>
               </div>
 
               <div className="flex items-center gap-3">
-                {/* View Mode Toggle — desktop */}
-                <div className="hidden sm:flex items-center gap-1 border border-border rounded-lg p-1">
+                {/* View Mode Toggle */}
+                <div className="hidden sm:flex items-center gap-1 border border-rose-100 dark:border-border rounded-xl p-1 bg-rose-50/60 dark:bg-transparent backdrop-blur-sm">
                   <button
                     onClick={() => setViewMode('grid')}
-                    className={`p-1.5 rounded transition ${viewMode === 'grid' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground'}`}
+                    className={`p-1.5 rounded-lg transition ${viewMode === 'grid' ? 'bg-rose-400 dark:bg-primary text-white dark:text-primary-foreground' : 'text-rose-400 dark:text-muted-foreground hover:text-rose-700 dark:hover:text-foreground'}`}
                     title="Grid view"
                   >
                     <LayoutGrid size={16} />
                   </button>
                   <button
                     onClick={() => setViewMode('list')}
-                    className={`p-1.5 rounded transition ${viewMode === 'list' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground'}`}
+                    className={`p-1.5 rounded-lg transition ${viewMode === 'list' ? 'bg-rose-400 dark:bg-primary text-white dark:text-primary-foreground' : 'text-rose-400 dark:text-muted-foreground hover:text-rose-700 dark:hover:text-foreground'}`}
                     title="List view"
                   >
                     <List size={16} />
@@ -134,7 +134,7 @@ export default function CategoryPageLayout({
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="px-2 md:px-3 py-2 border border-border rounded-lg text-xs md:text-sm font-medium text-foreground bg-background hover:border-primary transition-colors"
+                  className="px-2 md:px-3 py-2 border border-rose-100 dark:border-border rounded-xl text-xs md:text-sm font-medium text-rose-700 dark:text-foreground bg-rose-50/60 dark:bg-background hover:border-rose-300 dark:hover:border-primary transition-colors backdrop-blur-sm focus:outline-none"
                 >
                   <option value="featured">Featured</option>
                   <option value="newest">Newest</option>
