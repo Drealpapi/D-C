@@ -3,11 +3,82 @@
 import ThemeLogo from '@/components/logo'
 import Link from 'next/link'
 import { Search, ShoppingBag, Menu, X, User, Sun, Moon, LogOut } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { useTheme } from 'next-themes'
 import { useCart } from '@/lib/cart-context'
 import { useUserAuth } from '@/lib/user-auth-context'
 import SearchModal from '@/components/search-modal'
+
+const categories = [
+  { name: 'Jewellery',   href: '/shop/jewelry' },
+  { name: 'Earrings',    href: '/shop/earrings' },
+  { name: 'Bangles',     href: '/shop/bangles' },
+  { name: 'Accessories', href: '/shop/accessories' },
+]
+
+// ── Glide pill that slides between nav links ────────────────────────────────
+function GlideNav({ isLight }: { isLight: boolean }) {
+  const navRef   = useRef<HTMLElement>(null)
+  const linkRefs = useRef<(HTMLAnchorElement | null)[]>([])
+  const [pill, setPill] = useState({ left: 0, width: 0, opacity: 0 })
+
+  const onEnter = useCallback((i: number) => {
+    const link = linkRefs.current[i]
+    const nav  = navRef.current
+    if (!link || !nav) return
+    const lr = link.getBoundingClientRect()
+    const nr = nav.getBoundingClientRect()
+    setPill({ left: lr.left - nr.left, width: lr.width, opacity: 1 })
+  }, [])
+
+  const onLeave = useCallback(() => setPill(p => ({ ...p, opacity: 0 })), [])
+
+  return (
+    <nav
+      ref={navRef}
+      className="hidden lg:flex items-center gap-1 relative"
+      onMouseLeave={onLeave}
+    >
+      {/* Gliding pill */}
+      <span
+        aria-hidden="true"
+        style={{
+          position:   'absolute',
+          top:         0,
+          bottom:      0,
+          left:        pill.left,
+          width:       pill.width,
+          opacity:     pill.opacity,
+          transition:  'left 220ms cubic-bezier(0.4,0,0.2,1), width 220ms cubic-bezier(0.4,0,0.2,1), opacity 150ms ease',
+          pointerEvents: 'none',
+          borderRadius: '9999px',
+          background: isLight
+            ? 'rgba(251,113,133,0.12)'
+            : 'rgba(255,255,255,0.07)',
+          boxShadow: isLight
+            ? 'inset 0 0 0 1px rgba(251,113,133,0.25)'
+            : 'inset 0 0 0 1px rgba(255,255,255,0.08)',
+        }}
+      />
+
+      {categories.map((cat, i) => (
+        <Link
+          key={cat.name}
+          href={cat.href}
+          ref={el => { linkRefs.current[i] = el }}
+          onMouseEnter={() => onEnter(i)}
+          className={`relative px-4 py-1.5 text-sm font-medium tracking-wide transition-colors duration-200 rounded-full ${
+            isLight
+              ? 'text-rose-700/70 hover:text-rose-700'
+              : 'text-stone-400 hover:text-stone-100'
+          }`}
+        >
+          {cat.name}
+        </Link>
+      ))}
+    </nav>
+  )
+}
 
 export default function DivineHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -25,12 +96,7 @@ export default function DivineHeader() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const categories = [
-    { name: 'Jewellery',   href: '/shop/jewelry' },
-    { name: 'Earrings',    href: '/shop/earrings' },
-    { name: 'Bangles',     href: '/shop/bangles' },
-    { name: 'Accessories', href: '/shop/accessories' },
-  ]
+  const isLight = mounted ? theme === 'light' : true
 
   return (
     <header
@@ -140,35 +206,18 @@ export default function DivineHeader() {
         </div>
       </div>
 
-      {/* ── Expandable nav row — collapses to 0 height, expands on hover ── */}
+      {/* ── Expandable nav row with glide pill ── */}
       <div className="
         hidden lg:block
         overflow-hidden
         max-h-0 group-hover/header:max-h-16
         opacity-0 group-hover/header:opacity-100
         transition-all duration-300 ease-in-out
-        border-t border-rose-100/60 dark:border-white/[0.04]
+        border-t border-rose-100/40 dark:border-white/[0.04]
         group-hover/header:border-rose-200/60 dark:group-hover/header:border-white/[0.06]
       ">
-        <div className="px-4 md:px-8 py-3 flex items-center justify-between max-w-7xl mx-auto">
-
-          {/* Nav links */}
-          <nav className="flex items-center gap-9">
-            {categories.map((cat) => (
-              <Link
-                key={cat.name}
-                href={cat.href}
-                className="text-sm font-medium text-rose-700/70 dark:text-stone-400 tracking-wide
-                           transition-all duration-200
-                           hover:text-rose-600 dark:hover:text-amber-300
-                           hover:drop-shadow-[0_4px_8px_rgba(225,100,120,0.4)]"
-              >
-                {cat.name}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Announcement text — right side */}
+        <div className="px-4 md:px-8 py-2.5 flex items-center justify-between max-w-7xl mx-auto">
+          <GlideNav isLight={isLight} />
           <p className="text-[10px] tracking-[0.18em] text-rose-400/70 dark:text-white/25 uppercase hidden xl:block">
             ✦ &nbsp;Free UK delivery on orders over £75
           </p>

@@ -25,66 +25,92 @@ const features = [
   { icon: '◇', label: '30-Day Returns',     sub: 'Hassle-free guarantee' },
 ]
 
-function CategoryCard({ cat, tall = false, delay = 0 }: {
-  cat: typeof categories[0]; tall?: boolean; delay?: number
-}) {
-  const inner = (
-    <div className={`relative overflow-hidden bg-stone-100 dark:bg-stone-900 ${tall ? 'aspect-[3/4]' : 'aspect-[4/3]'}`}>
-      <Image
-        src={cat.image} alt={cat.name} fill
-        className={`object-cover object-center transition-transform duration-700 ease-out ${cat.comingSoon ? 'scale-105 blur-[2px] brightness-50' : 'group-hover:scale-[1.06]'}`}
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-      />
+function CategoryGrid() {
+  function CategoryCard({ cat, tall = false, delay = 0 }: {
+    cat: typeof categories[0]; tall?: boolean; delay?: number
+  }) {
+    const inner = (
+      <div className={`relative overflow-hidden bg-rose-50 dark:bg-[#16141a] ${tall ? 'aspect-[3/4]' : 'aspect-[4/3]'}`}>
+        <Image
+          src={cat.image} alt={cat.name} fill
+          className={`object-cover object-center transition-transform duration-700 ease-out ${cat.comingSoon ? 'scale-105 blur-[2px] brightness-50' : 'group-hover:scale-[1.06]'}`}
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          priority={delay <= 200}
+        />
 
-      {cat.comingSoon ? (
-        /* Coming Soon overlay */
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40">
-          <span className="text-[10px] uppercase tracking-[0.3em] text-rose-300/90 mb-2 font-medium">Coming Soon</span>
-          <h3 className="font-serif text-white text-xl md:text-2xl font-semibold mb-1" style={{ textShadow: '0 2px 16px rgba(0,0,0,0.7)' }}>
-            {cat.name}
-          </h3>
-          <p className="text-white/50 text-[11px] tracking-wide">{cat.description}</p>
-          <div className="mt-4 px-4 py-1.5 rounded-full border border-rose-300/40 text-rose-300/80 text-[10px] tracking-[0.2em] uppercase">
-            Stay tuned
-          </div>
-        </div>
-      ) : (
-        /* Live category overlay */
-        <>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-rose-900/55 via-rose-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          <div className="absolute inset-0 ring-0 ring-inset ring-rose-300/0 group-hover:ring-2 group-hover:ring-inset group-hover:ring-rose-300/60 dark:group-hover:ring-amber-400/40 transition-all duration-500" />
-          <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-            <h3
-              className={`font-serif text-white font-semibold mb-1 transition-all duration-300 group-hover:text-rose-100 dark:group-hover:text-amber-200 ${tall ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'}`}
-              style={{ textShadow: '0 2px 16px rgba(0,0,0,0.7)' }}
-            >
+        {cat.comingSoon ? (
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50">
+            <span className="text-[10px] uppercase tracking-[0.3em] text-rose-300/90 mb-2 font-medium">Coming Soon</span>
+            <h3 className="font-serif text-white text-xl md:text-2xl font-semibold mb-1" style={{ textShadow: '0 2px 16px rgba(0,0,0,0.7)' }}>
               {cat.name}
             </h3>
-            <p className="text-white/80 text-xs tracking-wide drop-shadow">{cat.description}</p>
-            <div className="flex items-center gap-2 mt-3 opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-300">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-rose-400/90 dark:bg-amber-500/90 text-white dark:text-stone-900 text-[10px] tracking-[0.18em] uppercase font-bold rounded-full shadow-lg">
-                Shop now →
-              </span>
+            <p className="text-white/50 text-[11px] tracking-wide">{cat.description}</p>
+            <div className="mt-4 px-4 py-1.5 rounded-full border border-rose-300/40 text-rose-300/80 text-[10px] tracking-[0.2em] uppercase">
+              Stay tuned
             </div>
           </div>
-        </>
-      )}
-    </div>
-  )
-
-  if (cat.comingSoon) {
-    return (
-      <div className="reveal cursor-default" style={{ transitionDelay: `${delay}ms` }}>
-        {inner}
+        ) : (
+          <>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-rose-900/55 via-rose-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 ring-0 ring-inset ring-rose-300/0 group-hover:ring-2 group-hover:ring-inset group-hover:ring-rose-300/60 dark:group-hover:ring-amber-400/40 transition-all duration-500" />
+            <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
+              <h3
+                className={`font-serif text-white font-semibold mb-1 transition-all duration-300 group-hover:text-rose-100 dark:group-hover:text-amber-200 ${tall ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'}`}
+                style={{ textShadow: '0 2px 16px rgba(0,0,0,0.7)' }}
+              >
+                {cat.name}
+              </h3>
+              <p className="text-white/80 text-xs tracking-wide drop-shadow">{cat.description}</p>
+              <div className="flex items-center gap-2 mt-3 opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-300">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-rose-400/90 dark:bg-amber-500/90 text-white dark:text-stone-900 text-[10px] tracking-[0.18em] uppercase font-bold rounded-full shadow-lg">
+                  Shop now →
+                </span>
+              </div>
+            </div>
+          </>
+        )}
       </div>
+    )
+
+    if (cat.comingSoon) {
+      return (
+        <div className="reveal cursor-default" style={{ transitionDelay: `${delay}ms` }}>
+          {inner}
+        </div>
+      )
+    }
+
+    return (
+      <Link href={cat.href} className="group block reveal" style={{ transitionDelay: `${delay}ms` }}>
+        {inner}
+      </Link>
     )
   }
 
   return (
-    <Link href={cat.href} className="group block reveal" style={{ transitionDelay: `${delay}ms` }}>
-      {inner}
-    </Link>
+    <div>
+      {/* Row 1: 1 tall + 2 square */}
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 mb-3 md:mb-4">
+        <div className="col-span-1 row-span-2">
+          <CategoryCard cat={categories[0]} tall delay={100} />
+        </div>
+        <CategoryCard cat={categories[1]} delay={200} />
+        <CategoryCard cat={categories[2]} delay={300} />
+      </div>
+
+      {/* Row 2: 2 square + 1 tall */}
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+        <CategoryCard cat={categories[3]} delay={150} />
+        <CategoryCard cat={categories[4]} delay={250} />
+        <div className="hidden md:block">
+          <CategoryCard cat={categories[5]} tall delay={350} />
+        </div>
+        <div className="md:hidden">
+          <CategoryCard cat={categories[5]} delay={350} />
+        </div>
+      </div>
+    </div>
   )
 }
 
@@ -138,26 +164,7 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* Row 1: 1 tall + 2 square */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 mb-3 md:mb-4">
-              <div className="col-span-1 row-span-2">
-                <CategoryCard cat={categories[0]} tall delay={100} />
-              </div>
-              <CategoryCard cat={categories[1]} delay={200} />
-              <CategoryCard cat={categories[2]} delay={300} />
-            </div>
-
-            {/* Row 2: 2 square + 1 tall */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-              <CategoryCard cat={categories[3]} delay={150} />
-              <CategoryCard cat={categories[4]} delay={250} />
-              <div className="hidden md:block">
-                <CategoryCard cat={categories[5]} tall delay={350} />
-              </div>
-              <div className="md:hidden">
-                <CategoryCard cat={categories[5]} delay={350} />
-              </div>
-            </div>
+            <CategoryGrid />
           </div>
         </section>
 
